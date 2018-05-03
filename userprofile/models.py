@@ -6,12 +6,12 @@ class UserProfile(models.Model):
 			('Trainer','Trainer'),
 		)
 	usertype = models.CharField(max_length=7, choices=utype, default='Trainee')
-	username = models.CharField(max_length=20, primary_key=True)
+	username = models.CharField(max_length=20, primary_key=True, unique=True)
 	firstname = models.CharField(max_length=30)
 	lastname = models.CharField(max_length=30)
 	age = models.IntegerField()
 	address = models.CharField(max_length=100)
-	email_add = models.CharField(max_length=50)
+	email_add = models.EmailField(max_length=50)
 	sex = (
 		('M','Male'),
 		('F','Female'),
