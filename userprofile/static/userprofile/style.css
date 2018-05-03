@@ -1,0 +1,25 @@
+body{
+	background-image: url("images/background.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	text-align: center;
+}
+
+div.background{
+	margin: 30px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    width: 50%;
+    left: 100px;
+    text-align: center;
+}
+
+div.login{
+	width: 800px;
+}
+
+#username{
+	margin-bottom: 20px;
+}
