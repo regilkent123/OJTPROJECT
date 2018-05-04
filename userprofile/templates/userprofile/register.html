@@ -5,13 +5,15 @@
   <div id="login-box">
   <div class="left">
     <h1>Sign up</h1>
-    
-    <input v-model="username" type="text" name="username" placeholder="Username" />
-    <input v-model="first_name" type="text" name="username" placeholder="First Name" />
-    <input v-model="last_name" type="text" name="username" placeholder="Last Name" />
-    <input v-model="email" type="text" name="email" placeholder="E-mail" /> <br>
-    <input v-model="password" type="password" name="password" placeholder="Password" />
-    <input v-model="repassword" type="password" name="password2" placeholder="Retype password" /><br><br>
+    <h1>{{ newUser }}</h1>
+    <ul>
+        <li v-for="user in users"><h1>{{ user.birthdate}}</h1></li>
+    </ul>
+    <input v-model="newUser.username" type="text" name="username" placeholder="Username" />
+    <input v-model="newUser.first_name" type="text" name="username" placeholder="First Name" />
+    <input v-model="newUser.last_name" type="text" name="username" placeholder="Last Name" />
+    <input v-model="newUser.email" type="text" name="email" placeholder="E-mail" /> <br>
+    <input v-model="newUser.password" type="password" name="password" placeholder="Password" />
     <input v-on:click="addUser()" type="submit" name="signup_submit" value="Sign me up" />
   </div>
 {% endverbatim %}

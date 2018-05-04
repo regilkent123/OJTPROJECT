@@ -21,7 +21,7 @@ class UserProfile(models.Model):
         ('M','Male'),
         ('F','Female'),
     )
-    gender = models.CharField(max_length=1, choices=sex)
+    gender = models.CharField(max_length=1, choices=sex, null=True, blank=True)
     height = models.PositiveIntegerField(validators=[MinValueValidator(1)], blank=True, null=True)
     weight = models.PositiveIntegerField(validators=[MinValueValidator(1)], blank=True, null=True)
     def __str__(self):
