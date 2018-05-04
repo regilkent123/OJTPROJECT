@@ -1,22 +1,36 @@
 from django.db import models
+import datetime
+from django.utils import timezone
+from django.core.validators import MinValueValidator
+from datetime import date
+from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
-	utype = (
-			('Trainee','Trainee'),
-			('Trainer','Trainer'),
-		)
-	usertype = models.CharField(max_length=7, choices=utype, default='Trainee')
-	username = models.CharField(max_length=20, primary_key=True, unique=True)
-	firstname = models.CharField(max_length=30)
-	lastname = models.CharField(max_length=30)
-	age = models.IntegerField()
-	address = models.CharField(max_length=100)
-	email_add = models.EmailField(max_length=50)
-	sex = (
-		('M','Male'),
-		('F','Female'),
-	)
-	gender = models.CharField(max_length=1, choices=sex)
-	height = models.IntegerField()
-	weight = models.IntegerField()
+    user = models.OneToOneField(
+            User, on_delete=models.CASCADE
+        )
+    utype = (
+            ('Trainee','Trainee'),
+            ('Trainer','Trainer'),
+        )
+    usertype = models.CharField(max_length=7, choices=utype, default='Trainee')
+    birthdate = models.DateField(blank=True, null=True)
+    address = models.CharField(max_length=100, blank=True)
+    sex = (
+        ('M','Male'),
+        ('F','Female'),
+    )
+    gender = models.CharField(max_length=1, choices=sex)
+    height = models.PositiveIntegerField(validators=[MinValueValidator(1)], blank=True, null=True)
+    weight = models.PositiveIntegerField(validators=[MinValueValidator(1)], blank=True, null=True)
+    def __str__(self):
+        print("PASDO")
+        return self.user.username
+
+
+    def is_legal_age(self):
+        now = date.today()
+        age = now - self.birthdate
+        return (age.days/365) >= 18
+
 # Create your models here.
