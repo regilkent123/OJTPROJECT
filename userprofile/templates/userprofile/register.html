@@ -1,29 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 {% verbatim %}
-<link rel="stylesheet" type="text/css" href="../static/userprofile/style.css" />
-<div class = "background">
-	<div id ="register">
-		<h1>REGISTER</h1>
-		<input list="type" type="text" id="reg" placeholder="Type of User"></br>
-		<datalist id="type">
-			<option value="Trainee">Trainee</option>
-			<option value="Trainer">Trainer</option>
-		</datalist>
-		<input type="text" id="reg" placeholder="Username"></br>
-		<input type="password" id="reg" placeholder="Password"></br>
-		<input type="password" id="reg" placeholder="Re-enter Password"></br>
-		<input type="email" id="reg" placeholder="Email Address"></br>
-		<input type="text" id="reg" placeholder="First Name"></br>
-		<input type="text" id="reg" placeholder="Last Name"></br>
-		<input type="number" id="reg" placeholder="Age" min=0></br>
-		<input type="text" id="reg" placeholder="Address"></br>
-		<input type="text" id="reg" placeholder="Gender"></br>
-		<input type="number" id="reg" placeholder="Height" min="0"></br>
-		<input type="number" id="reg" placeholder="Weight" min="0"></br>
-		<button id="reg">Submit</button>
-	</div>
-</div>
+<!-- <link rel="stylesheet" type="text/css" href="../static/userprofile/style.css" /> -->
+  <div id="login-box">
+  <div class="left">
+    <h1>Sign up</h1>
+    
+    <input type="text" name="username" placeholder="Username" />
+    <input type="text" name="email" placeholder="E-mail" /> <br>
+    <input type="password" name="password" placeholder="Password" />
+    <input type="password" name="password2" placeholder="Retype password" /><br><br>
+    <input type="email" name="email" placeholder="Email Address" />
+    <input type="text" name="firstname" placeholder="First Name" /><br>
+    <input type="text" name="lastname" placeholder="Last Name" />
+    <input type="number" name="age" placeholder="Age" /><br>
+    <input type="text" name="address" placeholder="Address" />
+    <input type="text" name="gender" placeholder="Gender" /><br>
+    <input type="number" name="height" placeholder="Height" />
+    <input type="number" name="weight" placeholder="Weight" /><br>
+    <input type="submit" name="signup_submit" value="Sign me up" />
+  </div>
 {% endverbatim %}
 {% endblock %}
 
