@@ -6,25 +6,63 @@
   <div class="left">
     <h1>Sign up</h1>
     
-    <input type="text" name="username" placeholder="Username" />
-    <input type="text" name="email" placeholder="E-mail" /> <br>
-    <input type="password" name="password" placeholder="Password" />
-    <input type="password" name="password2" placeholder="Retype password" /><br><br>
-    <input type="email" name="email" placeholder="Email Address" />
-    <input type="text" name="firstname" placeholder="First Name" /><br>
-    <input type="text" name="lastname" placeholder="Last Name" />
-    <input type="number" name="age" placeholder="Age" /><br>
-    <input type="text" name="address" placeholder="Address" />
-    <input type="text" name="gender" placeholder="Gender" /><br>
-    <input type="number" name="height" placeholder="Height" />
-    <input type="number" name="weight" placeholder="Weight" /><br>
-    <input type="submit" name="signup_submit" value="Sign me up" />
+    <input v-model="username" type="text" name="username" placeholder="Username" />
+    <input v-model="first_name" type="text" name="username" placeholder="First Name" />
+    <input v-model="last_name" type="text" name="username" placeholder="Last Name" />
+    <input v-model="email" type="text" name="email" placeholder="E-mail" /> <br>
+    <input v-model="password" type="password" name="password" placeholder="Password" />
+    <input v-model="repassword" type="password" name="password2" placeholder="Retype password" /><br><br>
+    <input v-on:click="addUser()" type="submit" name="signup_submit" value="Sign me up" />
   </div>
 {% endverbatim %}
 {% endblock %}
 
 {% block js %}
 {% verbatim %}
+    <script type="text/javascript">
+        var app = new Vue({
+            el: ".left",
+            data: function(){
+                return{
+                    users: [],
+                    newUser: {
+                        username:'',
+                        first_name: '',
+                        last_name: '',
+                        email: '',
+                        password: '',
+                },
+                currentUser: {}
+                }
+            },
 
+            mounted: function(){
+                this.getUsers();
+            },
+
+            methods: {
+                addUser: function(e){
+                    var resource = this.$resource('/api/userprofile/');
+                    resource.save({}, this.newUser)
+                        .then((response) => {
+                            this.getUsers();
+                        }).catch((error) => {
+
+                        });
+                },
+
+                getUsers: function(){
+                    var resource = this.$resource('/api/userprofile/');
+                    resource.get()
+                        .then((response) => {
+                            this.users = response.data;
+                        }).catch((error) => {
+
+                        });
+                },
+
+            }
+        })
+    </script>
 {% endverbatim %}
 {% endblock %}

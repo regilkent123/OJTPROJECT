@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
-            User, on_delete=models.CASCADE
+            User, on_delete=models.CASCADE,
+            primary_key=True,
         )
     utype = (
             ('Trainee','Trainee'),
@@ -24,7 +25,6 @@ class UserProfile(models.Model):
     height = models.PositiveIntegerField(validators=[MinValueValidator(1)], blank=True, null=True)
     weight = models.PositiveIntegerField(validators=[MinValueValidator(1)], blank=True, null=True)
     def __str__(self):
-        print("PASDO")
         return self.user.username
 
 
