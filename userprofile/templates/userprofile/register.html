@@ -1,20 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 {% verbatim %}
-<!-- <link rel="stylesheet" type="text/css" href="../static/userprofile/style.css" /> -->
-  <div id="login-box">
-  <div class="left">
+<link rel="stylesheet" type="text/css" href="../static/userprofile/style.css" />
+  <div class="container">
+  <div class="login">
     <h1>Sign up</h1>
-    <h1>{{ newUser }}</h1>
-    <ul>
-        <li v-for="user in users"><h1>{{ user.birthdate}}</h1></li>
-    </ul>
     <input v-model="newUser.username" type="text" name="username" placeholder="Username" />
     <input v-model="newUser.first_name" type="text" name="username" placeholder="First Name" />
     <input v-model="newUser.last_name" type="text" name="username" placeholder="Last Name" />
     <input v-model="newUser.email" type="text" name="email" placeholder="E-mail" /> <br>
     <input v-model="newUser.password" type="password" name="password" placeholder="Password" />
-    <input v-on:click="addUser()" type="submit" name="signup_submit" value="Sign me up" />
+    <button v-on:click="addUser">Add</button>
   </div>
 {% endverbatim %}
 {% endblock %}
@@ -23,7 +19,7 @@
 {% verbatim %}
     <script type="text/javascript">
         var app = new Vue({
-            el: ".left",
+            el: "#login",
             data: function(){
                 return{
                     users: [],
@@ -44,7 +40,7 @@
 
             methods: {
                 addUser: function(e){
-                    var resource = this.$resource('/api/userprofile/');
+                    var resource = this.$resource('/api/user/');
                     resource.save({}, this.newUser)
                         .then((response) => {
                             this.getUsers();
@@ -53,8 +49,8 @@
                         });
                 },
 
-                getUsers: function(){
-                    var resource = this.$resource('/api/userprofile/');
+                getUsers: function(e){
+                    var resource = this.$resource('/api/user/');
                     resource.get()
                         .then((response) => {
                             this.users = response.data;

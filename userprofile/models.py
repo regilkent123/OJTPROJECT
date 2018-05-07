@@ -27,7 +27,6 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-
     def is_legal_age(self):
         now = date.today()
         age = now - self.birthdate

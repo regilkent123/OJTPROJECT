@@ -7,6 +7,7 @@ class RegisterView(generic.TemplateView):
 class LoginView(generic.TemplateView):
     template_name = 'userprofile/login.html'
 
+
 class AfterLoginView(generic.TemplateView):
     template_name = 'userprofile/loggedin.html'
 

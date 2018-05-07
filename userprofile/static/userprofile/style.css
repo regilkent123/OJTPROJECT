@@ -25,7 +25,7 @@ html, body {
   max-width: 280px;
   min-height: 500px;
   margin: 30px auto;
-  background-color: rgba(10,10,10,.68);
+  background-color: rgba(1,10,10,.68);
 }
 
 .login-icon-field {
@@ -173,3 +173,5 @@ p a:hover {
     stroke-dashoffset: 0;
   }
 }
+
+/*REGISTER:*/
