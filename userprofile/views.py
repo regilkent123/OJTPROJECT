@@ -10,45 +10,26 @@ from .forms import RegisterForm
 
 class RegisterView(generic.TemplateView):
     template_name = 'userprofile/register.html'
+    initial = {'key': 'value'}
     form_class = RegisterForm
- 
+
 
     def get(self, request, *args, **kwargs):
-
-        return HttpResponseRedirect('/afterlogin/')
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
 
 
     def post(self,request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password')
+            username = form.cleaned_data['username']
+            raw_password = form.cleaned_data['password']
             user = authenticate(username=username, password=raw_password)
             if user is not None:
                 login(request, user)
                 return HttpResponseRedirect('/afterlogin/')
         return render(request, self.template_name, {'form': form})
-
-    # def registers(request):
-    #     if request.method == 'POST':
-    #         form = RegisterForm(request.POST)
-    #
-    #         if form.is_valid():
-    #             form.save()
-    #             username = form.cleaned_data.get('username')
-    #             raw_password = form.cleaned_data.get('password')
-    #             user = authenticate(username=username, password=raw_password)
-    #             login(request, user)
-    #             return HttpResponseRedirect('/afterlogin/')
-    #
-    #     else:
-    #         form = RegisterForm()
-    #     # only 79 char per line guys hahaha please don't go over 79 characters
-    #     return render(request, '../templates/userprofile/register.html', {'form': form})
-
-
-
 
 
 

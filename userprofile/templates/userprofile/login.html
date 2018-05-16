@@ -6,18 +6,19 @@
 
 
 <div class="container">
-    <form method="post" action="/loggedin/">
-        {% csrf_token %}
         <div class="login">
             <div id="logo"><img src="{% static "userprofile/images/edit.png" %}">
             </div>
+            <form method="post" action="/loggedin/">
+            {% csrf_token %}
             <div id= loginform>
             <input type="text" id="login_input" name="username" placeholder="username"><br>
             <input type="password" id="login_input" name="password" placeholder="password"><br>
-            <button>Login</button><a href="/register">Sign up here</a>
+            <button type="submit">Login</button>
+            <a href="/register/">Sign up here</a>
+            </form>
             </div>
         </div>
-    </form>
 </div>
 
 {% endblock %}

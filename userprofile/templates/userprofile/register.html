@@ -5,19 +5,18 @@
 <div class="container">
     <div class="login">
         <h1>Sign up</h1>
-
-
         <div class="log">
-            <form method="post">
+            <form method="post" action="/register/">
             {% csrf_token %}
             <input name="{{ form.username.name}}" id="register_input" placeholder="Username"><br>
-            <input type="password" name="{{ form.password1.name}}" id="register_input" placeholder="Password"><br>
-            <input type="password" name="{{ form.password2.name}}" id="register_input" placeholder="Confirm Password"><br>
+            <input type="password" name="{{ form.password.name}}" id="register_input" placeholder="Password"><br>
+            <input type="password" name="{{ form.repassword.name}}" id="register_input" placeholder="Confirm Password"><br>
             <input name="{{ form.email.name}}" id="register_input" placeholder="Email"><br>
             <input name="{{ form.first_name.name}}" id="register_input" placeholder="First Name"><br>
             <input name="{{ form.last_name.name}}" id="register_input" placeholder="Last Name"><br>
             <button>Register</button>
-        </form>
+            <a href="/">Login</a>
+            </form>
         </div>
     </div>
 </div>
