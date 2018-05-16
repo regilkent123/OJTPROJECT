@@ -1,0 +1,43 @@
+
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "userprofile/styles.css" %}" />
+
+
+<div class="container">
+    <form method="post" action="/loggedin/">
+        {% csrf_token %}
+        <div class="login">
+            <div id="logo"><img src="{% static "userprofile/images/edit.png" %}">
+            </div>
+            <div id= loginform>
+            <input type="text" id="login_input" name="username" placeholder="username"><br>
+            <input type="password" id="login_input" name="password" placeholder="password"><br>
+            <button>Login</button><a href="/register">Sign up here</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block js %}
+{% verbatim %}
+<!-- <script type="text/javascript">
+    var app = new Vue({
+    el: '.login',
+    data: function(){
+        return{
+            users: [],
+            loginUser: {
+                username:'',
+                password: '',
+            }
+        }
+    },
+})
+</script> -->
+
+{% endverbatim %}
+{% endblock %}
