@@ -3,9 +3,6 @@ from django.contrib.auth.models import User
 from django import forms
 from django.core.exceptions import ValidationError
 
-#i still get error kuya
-# what error?
-#naa groupchat
 class RegisterForm(forms.ModelForm):
 
     repassword = forms.CharField( widget=forms.PasswordInput)
@@ -19,7 +16,7 @@ class RegisterForm(forms.ModelForm):
         username_get = self.cleaned_data.get('username').lower()
         username_exist = User.objects.filter(username=username_get)
         if username_exist.exists():
-            raise  ValidationError("Username already exists")
+            raise  forms.ValidationError("Username already exists")
         return username_get
 
     def clean_email(self):
@@ -30,20 +27,23 @@ class RegisterForm(forms.ModelForm):
             raise  ValidationError("Email already exists")
         return email_get
 
+
     def clean(self):
+
+        super(RegisterForm,self).clean()
         password_get = self.cleaned_data.get('password')
         repassword_get = self.cleaned_data.get('repassword')
 
         if password_get and repassword_get and password_get != repassword_get:
             raise ValidationError("Password don't match")
 
-        return repassword_get
+        return self.cleaned_data
 
     def save(self):
         user = User.objects.create_user(
             username = self.cleaned_data.get('username'),
             email = self.cleaned_data.get('email'),
-            password = self.cleaned_data['password1'],
+            password = self.cleaned_data['password'],
             first_name = self.cleaned_data.get('first_name'),
             last_name = self.cleaned_data.get('last_name')
         )

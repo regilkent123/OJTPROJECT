@@ -8,6 +8,11 @@ from django.views.generic import ListView
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterForm
 
+# unsay error? wait gi close lagi nimo ang forms
+#wala man kuya, naa ra gehapon
+#AttributeError: 'str' object has no attribute 'get'
+#unya ge highlight ang if form.is_valid()
+
 class RegisterView(generic.TemplateView):
     template_name = 'userprofile/register.html'
     initial = {'key': 'value'}
