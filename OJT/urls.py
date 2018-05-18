@@ -21,9 +21,7 @@ from .routers import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('userprofile.urls')),
     path('', include('workout.urls')),
-    path('', include('videostream.urls')),
     path('api/', include(router.urls)),
 
 
