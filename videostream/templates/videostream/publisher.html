@@ -1,0 +1,19 @@
+{% load static %}
+
+<html>
+<head>
+    <title>4ft</title>
+    <!-- <link href="{% static 'smalltalk/client.css' %}" rel="stylesheet" type="text/css"> -->
+    <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
+    <script type="text/javascript">
+        var apiKey = '{{api_key}}';
+        var sessionId = '{{session_id}}';
+        var token = '{{token}}';
+    </script>
+</head>
+<body>
+    <button id="1">Start </button>
+    <button id="2">End </button>
+    <script type="text/javascript" src="{% static 'videostream/publisher.js' %}"></script>
+</body>
+</html>
