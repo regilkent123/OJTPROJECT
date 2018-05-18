@@ -1,5 +1,0 @@
-
-*.pyc
-virtenv/
-venv/
-*.sqlite3
