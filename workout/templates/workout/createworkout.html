@@ -11,7 +11,8 @@
 </div>
 <div class = "content_createworkout">
     <div class = "layout_createworkout">
-    	<form method="post" action="{% url 'user:createworkout' %}">
+    	<form method="post" action="{% url 'user:createworkout' %}"
+        enctype="multipart/form-data">
     		{% csrf_token %}
     		<h1>CREATE WORKOUT</h1>
     		<input name="{{ form.workout_name.name }}" class="createworkout" placeholder="WORKOUT NAME"><br><br>
@@ -21,7 +22,8 @@
     		<option value="type">{{ type }}</option>
     		{% endfor %}
     		</select><br><br>
-    		<input name="{{ form.description.name }}" class="createworkout" placeholder="DESCRIPTION">
+            <textarea name="{{ form.description.name }}" class="createworkout" placeholder="DESCRIPTION" WRAP="HARD"></textarea><br><br>
+            <input type="file" class="createworkout" name="{{ form.workout_photo.name }}"><br><br>
     		<button>Create</button>
     	</form>
     </div>

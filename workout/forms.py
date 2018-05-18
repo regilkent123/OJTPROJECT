@@ -6,9 +6,9 @@ class WorkoutForm(forms.ModelForm):
     
     class Meta:
         model = Workout
-        fields = ['workout_name', 'workout_type', 'description']
+        fields = ['workout_name', 'workout_type', 'description', 'workout_photo']
         widgets = {
-            'description': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
+            'description': forms.Textarea(attrs={'cols': 10, 'rows': 20}),
         }
 
 
@@ -17,5 +17,6 @@ class WorkoutForm(forms.ModelForm):
         workout_name = self.cleaned_data.get('workout_name'),
         workout_type = self.cleaned_data.get('workout_type'),
         description = self.cleaned_data.get('description'),
+        workout_photo = self.cleaned_data.get('workout_photo'),
         )
         return createworkout

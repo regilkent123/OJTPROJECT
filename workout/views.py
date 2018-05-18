@@ -21,10 +21,9 @@ class CreateWorkoutView(generic.TemplateView):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs) :
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            workoutName = form.cleaned_data['workout_name']
             return HttpResponseRedirect('/workout/')
         return render(request, self.template_name, {'form': form})
 # Create your views here.
