@@ -3,4 +3,8 @@ django-filter==1.1.0
 djangorestframework==3.8.2
 Markdown==2.6.11
 pytz==2018.4
+<<<<<<< HEAD
 opentok>=2.2
+=======
+Pillow==5.1.0
+>>>>>>> db8a8a06ecd9faf89c2ab86c2f2c7f59aa4e406d
