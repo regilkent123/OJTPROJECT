@@ -1,7 +1,7 @@
 body {
     background: white url("images/background.jpg");
     background-repeat: no-repeat;
-    background-size: 2000px;
+    background-size: 3023px * 2018px;
 }
 
 div.content {
@@ -127,7 +127,7 @@ button {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    font-family: OCR A St;
+    font-family: OCR A Std, monospace;
 }
 
 
@@ -157,18 +157,18 @@ div.content-layout{
     margin: 0.5em;
     height: 600px;
     height: 500px;
-
-    background-color: rgba(163, 29, 11, 0.6);
-    border-radius: 4px;
+    background-color: rgba(229, 230, 232, 0.6);
+    border-radius: 12px;
 }
 
 .content-layout div p{
-    font-family: OCR A St;
-    text-align: left
+    text-align: left;
+    font-weight: 900;
+    font-family: OCR A Std, monospace;
 }
 
 .content-layout div img{
-    width: 100%;
+    width: 95%;
     height: 350px;
 
 }

@@ -12,9 +12,11 @@ class Workout(models.Model):
 		(balance, 'Balance exercise'),
 		(flexibility, 'Flexibility exercise'),
 		)
-	workout_type = models.IntegerField(choices = workoutType)
+	workout_type = models.IntegerField(choices = workoutType, blank = False, default = None)
 	description = models.CharField(max_length = 150, blank = True, null = True)
 	workout_photo = models.ImageField(upload_to = 'images/', null = True)
+
 	def __str__(self):
 		return self.workout_name
+
 # Create your models here.
