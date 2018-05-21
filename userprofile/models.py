@@ -17,7 +17,7 @@ class UserProfile(models.Model):
             (trainee,'Trainee'),
             (trainer,'Trainer'),
         )
-    usertype = models.IntegerField(choices=utype, default='Trainee')
+    usertype = models.IntegerField(choices=utype, default=trainee)
     birthdate = models.DateField(blank=True, null=True)
     address = models.CharField(max_length=100, blank=True)
     sex = (
