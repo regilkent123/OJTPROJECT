@@ -10,11 +10,14 @@ class UserProfile(models.Model):
             User, on_delete=models.CASCADE,
             primary_key=True,
         )
+
+    trainee = 1
+    trainer = 2
     utype = (
-            ('Trainee','Trainee'),
-            ('Trainer','Trainer'),
+            (trainee,'Trainee'),
+            (trainer,'Trainer'),
         )
-    usertype = models.CharField(max_length=7, choices=utype, default='Trainee')
+    usertype = models.IntegerField(choices=utype, default='Trainee')
     birthdate = models.DateField(blank=True, null=True)
     address = models.CharField(max_length=100, blank=True)
     sex = (
