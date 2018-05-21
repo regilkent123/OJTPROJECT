@@ -18,7 +18,7 @@
         </div>
         <div class="content-layout">
             <div class="workout" v-for="workout in workouts">
-                <img v-bind:src="[[workout.workout_photo]]">
+                <img v-bind:src="workout.workout_photo">
                 <p>Workout Name: <a href="">[[workout.workout_name]]</a></p>
                 <p>Workout Type: [[workout.workout_type]]</p>
                 <p>Description: [[workout.description]]</p>
@@ -49,7 +49,7 @@
                         .then((response)=> {
                             this.workouts = response.data;
                         }).catch((error) => {
-
+                            console.log('ERROR')
                         });
                 }
             }
