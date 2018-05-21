@@ -48,6 +48,7 @@
                     resource.get()
                         .then((response)=> {
                             this.workouts = response.data;
+                            debugger;
                         }).catch((error) => {
                             console.log('ERROR')
                         });
