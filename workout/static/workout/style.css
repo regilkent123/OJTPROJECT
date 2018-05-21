@@ -155,7 +155,7 @@ div.content-layout{
     width: 31.95%;
     border:thin solid #777;
     margin: 0.5em;
-    height: 400px;
+    height: 500px;
     background-color: rgba(163, 29, 11, 0.6);
     border-radius: 4px;
 }
@@ -167,6 +167,7 @@ div.content-layout{
 
 .content-layout div img{
     width: 100%;
+    height: 300px;
 }
 
 ::-webkit-scrollbar {
