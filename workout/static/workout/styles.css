@@ -1,5 +1,5 @@
 body {
-    background: white url("images/background.jpg");
+    background: url("images/background.jpg");
     background-repeat: no-repeat;
     background-size: 3023px * 2018px;
 }
@@ -176,4 +176,10 @@ div.content-layout{
 ::-webkit-scrollbar {
     display: none;
     width: 0px;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }

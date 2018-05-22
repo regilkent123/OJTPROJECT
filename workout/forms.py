@@ -11,6 +11,9 @@ class WorkoutForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'cols': 10, 'rows': 20}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super(WorkoutForm, self).__init__(*args, **kwargs)
+        self.fields['workout_type'].empty_label =  None
 
     def save(self):
         createworkout = Workout.objects.create(
