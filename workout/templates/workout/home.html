@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static "workout/styles.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "workout/stylesheets/asd.css" %}" />
 <div class="navbar">
 	<ul>
 		<li><a class="active" href="{% url 'user:home' %}">Home</a></li>
 		<li><a href="{% url 'user:workout' %}">Workout</a></li>
+		<li><a class="user" href=""><img src="{% static "workout/images/user.png" %}"></a></li>
 		<li style="float:right"><a href="">Logout</a></li>
 	</ul>
 </div>

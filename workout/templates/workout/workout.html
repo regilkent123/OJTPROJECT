@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static "workout/styles.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "workout/stylesheets/asd.css" %}" />
 <div class="navbar">
     <ul>
         <li><a href="{% url 'user:home' %}">Home</a></li>
         <li><a class="active" href="{% url 'user:workout' %}">Workout</a></li>
+        <li><a class="user" href=""><img src="{% static "workout/images/user.png" %}"></a></li>
         <li style="float:right"><a href="">Logout</a></li>
     </ul>
 </div>
@@ -18,7 +19,7 @@
         </div>
         <div class="content-layout">
             <div class="workout" v-for="workout in workouts">
-                <img v-bind:src="workout.workout_photo">
+                <a href=""><img v-bind:src="workout.workout_photo"></a>
                 <p>Workout Name: <a href="">[[workout.workout_name]]</a></p>
                 <p>Workout Type: [[workout.workout_type]]</p>
                 <p>Description: [[workout.description]]</p>
@@ -48,7 +49,6 @@
                     resource.get()
                         .then((response)=> {
                             this.workouts = response.data;
-                            debugger;
                         }).catch((error) => {
                             console.log('ERROR')
                         });

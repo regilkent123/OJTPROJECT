@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static "workout/styles.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "workout/stylesheets/asd.css" %}" />
 <div class="navbar">
     <ul>
         <li><a href="{% url 'user:home' %}">Home</a></li>
         <li><a class="active" href="{% url 'user:workout' %}">Workout</a></li>
+        <li><a class="user" href=""><img src="{% static "workout/images/user.png" %}"></a></li>
         <li style="float:right"><a href="">Logout</a></li>
     </ul>
 </div>
@@ -18,8 +19,8 @@
     		<input name="{{ form.workout_name.name }}" class="createworkout" placeholder="WORKOUT NAME"><br><br>
     		<select name="{{ form.workout_type.name }}" class="createworkout" placeholder = "WORKOUT TYPE">
     		<option value="">WORKOUT TYPE</option>
-    		{% for type in form.workout_type %}
-    		<option value="type">{{ type }}</option>
+    		{% for value, label in form.workout_type.field.choices %}
+    		<option value="{{value}}">{{ label }}</option>
     		{% endfor %}
     		</select><br><br>
             <textarea name="{{ form.description.name }}" class="createworkout" placeholder="DESCRIPTION" WRAP="HARD"></textarea><br><br>

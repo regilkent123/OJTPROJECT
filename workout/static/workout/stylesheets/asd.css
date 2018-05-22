@@ -1,0 +1,227 @@
+/* line 1, ../sass/asd.scss */
+body {
+  background: white url("../images/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+
+/* line 9, ../sass/asd.scss */
+div.navbar {
+  position: relative;
+}
+/* line 11, ../sass/asd.scss */
+div.navbar ul {
+  position: relative;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  width: 100%;
+  bottom: 10px;
+}
+/* line 21, ../sass/asd.scss */
+div.navbar ul li {
+  float: left;
+}
+/* line 24, ../sass/asd.scss */
+div.navbar ul li a:not(.user) {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 30px;
+  text-decoration: none;
+  font-size: 30px;
+}
+/* line 32, ../sass/asd.scss */
+div.navbar ul li a:not(.user).active {
+  background-color: #a31d0b;
+}
+/* line 37, ../sass/asd.scss */
+div.navbar ul li a:hover:not(.active) {
+  background-color: #111;
+}
+/* line 41, ../sass/asd.scss */
+div.navbar ul li img {
+  position: absolute;
+  height: 60px;
+  display: block;
+  right: 50%;
+}
+/* line 46, ../sass/asd.scss */
+div.navbar ul li img:hover {
+  transform: scale(1.4);
+}
+
+/* line 55, ../sass/asd.scss */
+div.content {
+  text-align: center;
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+}
+/* line 61, ../sass/asd.scss */
+div.content div.layout {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid black;
+  filter: alpha(opacity=60);
+  width: 70%;
+  padding-bottom: 20px;
+  height: 80%;
+  bottom: 30%;
+  border-radius: 12px;
+  top: 100px;
+  text-align: center;
+  overflow: auto;
+}
+/* line 75, ../sass/asd.scss */
+div.content div.layout::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+}
+/* line 81, ../sass/asd.scss */
+div.content div.layout div.header {
+  position: fixed;
+  width: 70%;
+  background-color: #4a4b4c;
+}
+/* line 87, ../sass/asd.scss */
+div.content div.layout div.content-layout {
+  padding-top: 60px;
+  width: 100%;
+  content: "";
+  display: table;
+  clear: both;
+}
+/* line 94, ../sass/asd.scss */
+div.content div.layout div.content-layout div {
+  float: left;
+  width: 31.95%;
+  border: thin solid #777;
+  margin: 0.5em;
+  height: 600px;
+  height: 500px;
+  background-color: rgba(229, 230, 232, 0.6);
+  border-radius: 12px;
+}
+/* line 104, ../sass/asd.scss */
+div.content div.layout div.content-layout div p {
+  text-align: left;
+  font-weight: 900;
+  font-family: OCR A Std, monospace;
+}
+/* line 110, ../sass/asd.scss */
+div.content div.layout div.content-layout div img {
+  width: 95%;
+  height: 350px;
+  transition: transform 0.5s;
+  border-radius: 4px;
+}
+/* line 116, ../sass/asd.scss */
+div.content div.layout div.content-layout div img:hover {
+  transform: scale(1.1);
+}
+/* line 121, ../sass/asd.scss */
+div.content div.layout div.content-layout div a {
+  color: black;
+}
+/* line 124, ../sass/asd.scss */
+div.content div.layout div.content-layout div a:hover {
+  color: #521f7c;
+}
+/* line 131, ../sass/asd.scss */
+div.content div.layout * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 139, ../sass/asd.scss */
+input, select, textarea, button, a {
+  color: white;
+  font-family: OCR A Std, monospace;
+  weight: 900;
+}
+
+/* line 145, ../sass/asd.scss */
+button {
+  background-color: #a31d0b;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+/* line 158, ../sass/asd.scss */
+button:hover {
+  background-color: #111;
+}
+
+/* line 163, ../sass/asd.scss */
+div.content_createworkout {
+  text-align: center;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+/* line 169, ../sass/asd.scss */
+div.content_createworkout div.layout_createworkout {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid black;
+  filter: alpha(opacity=60);
+  width: 50%;
+  padding-bottom: 20px;
+  height: 80%;
+  bottom: 30%;
+  border-radius: 12px;
+  top: 100px;
+}
+/* line 181, ../sass/asd.scss */
+div.content_createworkout div.layout_createworkout h1 {
+  font-family: OCR A Std, monospace;
+  color: white;
+  font-size: 50px;
+}
+/* line 187, ../sass/asd.scss */
+div.content_createworkout div.layout_createworkout ::placeholder {
+  color: white;
+  opacity: 0.6;
+}
+/* line 192, ../sass/asd.scss */
+div.content_createworkout div.layout_createworkout textarea {
+  resize: none;
+}
+/* line 197, ../sass/asd.scss */
+div.content_createworkout div.layout_createworkout .createworkout {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #a31d0b;
+  background-color: transparent;
+  font-size: 30px;
+  text-align: center;
+}
+/* line 208, ../sass/asd.scss */
+div.content_createworkout div.layout_createworkout .createworkout:focus {
+  border-bottom: 2px solid #0b91a3;
+  outline: none;
+}
+/* line 212, ../sass/asd.scss */
+div.content_createworkout div.layout_createworkout .createworkout:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+/* line 217, ../sass/asd.scss */
+div.content_createworkout div.layout_createworkout select.createworkout {
+  background: rgba(0, 0, 0, 0.3);
+}
