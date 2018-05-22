@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static "userprofile/style.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "userprofile/stylesheets/asd.css" %}" />
 <div class="container">
     <div class="login">
         <h1>Sign up</h1>
@@ -14,8 +14,8 @@
             <input name="{{ form.email.name }}" class="register_input" placeholder="Email"><br>
             <input name="{{ form.first_name.name }}" class="register_input" placeholder="First Name"><br>
             <input name="{{ form.last_name.name }}" class="register_input" placeholder="Last Name"><br>
-            <button>Register</button>
-            <a href="/">Login</a>
+            <button id="register">Register</button>
+            <a id="register" href="/">Login</a>
             </form>
         </div>
     </div>

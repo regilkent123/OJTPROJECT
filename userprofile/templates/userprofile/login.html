@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static "userprofile/style.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "userprofile/stylesheets/asd.css" %}" />
 
 
 <div class="container">
@@ -14,8 +14,8 @@
             <div id= loginform>
             <input type="text" class="login_input" name="username" placeholder="username"><br>
             <input type="password" class="login_input" name="password" placeholder="password"><br>
-            <button type="submit">Login</button>
-            <a href="{% url 'user:register' %}">Sign up here</a>
+            <button type="submit" id="login">Login</button>
+            <a id="signup" href="{% url 'user:register' %}">Signup here</a>
             </form>
             </div>
         </div>

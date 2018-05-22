@@ -1,6 +1,6 @@
 body {
 	background: white url("images/exercise.jpg");
-	 background-repeat: no-repeat;
+	background-repeat: no-repeat;
 	background-size: 100%;
 }
 
@@ -47,6 +47,7 @@ input.register_input{
     font-size: 20px;
     text-align: center;
 }
+
 input.login_input{
     width: 100%;
     padding: 12px 20px;
