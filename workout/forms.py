@@ -14,12 +14,3 @@ class WorkoutForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(WorkoutForm, self).__init__(*args, **kwargs)
         self.fields['workout_type'].empty_label =  None
-
-    def save(self):
-        createworkout = Workout.objects.create(
-        workout_name = self.cleaned_data.get('workout_name'),
-        workout_type = self.cleaned_data.get('workout_type'),
-        description = self.cleaned_data.get('description'),
-        workout_photo = self.cleaned_data.get('workout_photo'),
-        )
-        return createworkout
