@@ -41,10 +41,10 @@ class RegisterForm(forms.ModelForm):
 
     def save(self):
         user = User.objects.create_user(
-            username = self.cleaned_data.get('username'),
-            email = self.cleaned_data.get('email'),
-            password = self.cleaned_data['password'],
-            first_name = self.cleaned_data.get('first_name'),
-            last_name = self.cleaned_data.get('last_name')
+            username=self.cleaned_data.get('username'),
+            email=self.cleaned_data.get('email'),
+            password=self.cleaned_data['password'],
+            first_name=self.cleaned_data.get('first_name'),
+            last_name=self.cleaned_data.get('last_name')
         )
         return user

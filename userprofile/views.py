@@ -30,8 +30,7 @@ class RegisterView(TemplateView):
                 return HttpResponseRedirect('/afterlogin/')
             else:
                 form = RegistrationForm()
-            args['form'] = form
-        return render(request, self.template_name, {'form': form}, args)
+        return render(request, self.template_name, {'form': form})
 
 
 
@@ -58,7 +57,7 @@ class AfterLoginView(TemplateView):
 class LogOutView(TemplateView):
     def get(self,request):
         logout(request)
-        return HttpResponseRedirect('/login/')
+        return HttpResponse('LOGGED OUT!')
 
 
 # Create your views here.
