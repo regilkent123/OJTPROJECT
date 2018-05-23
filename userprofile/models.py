@@ -11,13 +11,13 @@ class UserProfile(models.Model):
             primary_key=True,
         )
 
-    trainee = 1
-    trainer = 2
+    TRAINEE = 1
+    TRAINER = 2
     utype = (
-            (trainee,'Trainee'),
-            (trainer,'Trainer'),
+            (TRAINEE,'Trainee'),
+            (TRAINER,'Trainer'),
         )
-    usertype = models.IntegerField(choices=utype, default=trainee)
+    usertype = models.PositiveIntegerField(choices=utype, default=TRAINEE)
     birthdate = models.DateField(blank=True, null=True)
     address = models.CharField(max_length=100, blank=True)
     sex = (

@@ -1,15 +1,12 @@
-
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static "userprofile/stylesheets/asd.css" %}" />
-
-
 <div class="container">
         <div class="login">
             <div id="logo"><img src="{% static "userprofile/images/edit.png" %}">
             </div>
-            <form method="post" action="{% url 'user:loggedin' %}">
+            <form method="post" action="{% url 'user:login' %}">
             {% csrf_token %}
             <div id= loginform>
             <input type="text" class="login_input" name="username" placeholder="username"><br>

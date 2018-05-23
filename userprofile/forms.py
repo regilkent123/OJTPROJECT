@@ -28,7 +28,7 @@ class RegisterForm(forms.ModelForm):
         return email_get
 
 
-    def clean(self):
+    def clean_repassword(self):
 
         super(RegisterForm,self).clean()
         password_get = self.cleaned_data.get('password')

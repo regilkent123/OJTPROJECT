@@ -8,9 +8,12 @@
         <div class="log">
             <form method="post" action="{% url 'user:register' %}">
             {% csrf_token %}
+            <span>{{ form.errors.username.as_text }}</span>
             <input name="{{ form.username.name }}" class="register_input" placeholder="Username"><br>
             <input type="password" name="{{ form.password.name }}" class="register_input" placeholder="Password"><br>
+            <span>{{ form.errors.repassword.as_text }}</span>
             <input type="password" name="{{ form.repassword.name }}" class="register_input" placeholder="Confirm Password"><br>
+            <span>{{ form.errors.email.as_text }}</span>
             <input name="{{ form.email.name }}" class="register_input" placeholder="Email"><br>
             <input name="{{ form.first_name.name }}" class="register_input" placeholder="First Name"><br>
             <input name="{{ form.last_name.name }}" class="register_input" placeholder="Last Name"><br>
