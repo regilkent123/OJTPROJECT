@@ -26,8 +26,8 @@
         </div>
         <div class="content-layout">
             <div class="workout" v-for="workout in workouts">
-                <a href=""><img v-bind:src="workout.workout_photo"></a>
-                <p>Workout Name: <a href="">[[workout.workout_name]]</a></p>
+                <a v-bind:href="workout.workout_photo"><img v-bind:src="workout.workout_photo"></a>
+                <p>Workout Name: <a v-bind:href="workout.id">[[workout.workout_name]]</a></p>
                 <p>Workout Type: [[workout.workout_type]]</p>
                 <p>Description: [[workout.description]]</p>
             </div>
@@ -44,7 +44,7 @@
             data: function(){
                 return{
                     workouts:[],
-                    currentworkout:{}
+                    currentworkout:{},
                 }
             },
             mounted: function(){

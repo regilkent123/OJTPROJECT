@@ -142,6 +142,31 @@ div.content {
             width: 0px;
         }
 
+        img{
+            height: 200%;
+        }
+
+        .info-header{
+            position: fixed;
+            text-align: left;
+            background-color: white;
+            width: 100%;
+            .info{
+                padding-bottom: 10px;
+                background-color: #a31d0b;
+                overflow: hidden;
+                h1{
+                    font-size: 1.3em;
+                    font-family: calibri, arial;
+                    font-size: 25px;
+                    color: #333;
+                    span{
+                        padding: 1px;
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
 
         div.header{
             position: fixed;
@@ -201,7 +226,7 @@ div.content {
     }
 }
 
-input, select, textarea, button, a{
+input, select, textarea, button, a, span{
     color: white;
     font-family: OCR A Std, monospace;
     weight: 900;
@@ -295,7 +320,7 @@ div.content_createworkout {
 
         }
     }
-    
+
     div.layout_createworkout{
         position: fixed;
         background-color: rgba(0, 0, 0, 0.6);
