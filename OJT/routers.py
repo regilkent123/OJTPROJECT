@@ -1,4 +1,5 @@
 from rest_framework.routers import DefaultRouter
+from userprofile.viewsets import UserProfileViewset, UserViewset
 from workout.viewsets import WorkoutViewset
 
 router = DefaultRouter()

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "userprofile/styles.css" %}" />
+<div class="container">
+    <div class="login">
+        <h1>Sign up</h1>
+
+
+        <div class="log">
+            <form method="post">
+            {% csrf_token %}
+            <input name="{{ form.username.name}}" id="register_input" placeholder="Username"><br>
+            <input type="password" name="{{ form.password1.name}}" id="register_input" placeholder="Password"><br>
+            <input type="password" name="{{ form.password2.name}}" id="register_input" placeholder="Confirm Password"><br>
+            <input name="{{ form.email.name}}" id="register_input" placeholder="Email"><br>
+            <input name="{{ form.first_name.name}}" id="register_input" placeholder="First Name"><br>
+            <input name="{{ form.last_name.name}}" id="register_input" placeholder="Last Name"><br>
+            <button>Register</button>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+{% verbatim %}
+<!--     <script type="text/javascript">
+        var app = new Vue({
+            delimiters: ["[[","]]"],
+            el: ".log",
+            data: function(){
+                return{
+                    users: [],
+                    newUser: {
+                        username:'',
+                        first_name: '',
+                        last_name: '',
+                        email: '',
+                        password: '',
+                },
+                }
+            },
+
+            mounted: function(){
+                this.getUsers();
+            },
+
+            methods: {
+                addUser: function(e){
+                    var resource = this.$resource('/api/user/');
+                    resource.save({}, this.newUser)
+                        .then((response) => {
+                            this.getUsers();
+                        }).catch((error) => {
+
+                        });
+                },
+
+                getUsers: function(e){
+                    var resource = this.$resource('/api/user/');
+                    resource.get()
+                        .then((response) => {
+                            this.users = response.data;
+                        }).catch((error) => {
+
+                        });
+                },
+            }
+        })
+    </script> -->
+{% endverbatim %}
+{% endblock %}
