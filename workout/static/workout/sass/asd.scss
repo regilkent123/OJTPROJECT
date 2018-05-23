@@ -19,24 +19,24 @@ div.navbar{
         bottom: 10px;
 
         li {
-        	float: left;
+            float: left;
     
-        	& a:not(.user) {
-        		display: block;
-        		color: white;
-        		text-align: center;
-        		padding: 14px 30px;
-        		text-decoration: none;
-        		font-size: 30px;
+            & a:not(.user) {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 30px;
+                text-decoration: none;
+                font-size: 30px;
     
-        		&.active {
-        			background-color:#a31d0b;
-    			}
-    		}
+                &.active {
+                    background-color:#a31d0b;
+                }
+            }
     
-    		& a:hover:not(.active) {
-        		  background-color: #111;
-    		}
+            & a:hover:not(.active) {
+                  background-color: #111;
+            }
     
             & img{
                 position: absolute;
@@ -48,7 +48,7 @@ div.navbar{
                 }
             }
     
-    	}
+        }
     }
 }
 
@@ -58,65 +58,130 @@ div.content {
     width: 70%;
     padding: 10px;
 
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+        
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%;
+            height: 80%;
+            border-radius: 9px;
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+
+            h1{
+                font-family: OCR A Std, monospace;
+                weight: 900;
+            }
+            img{
+                border: 3px solid black; 
+                border-radius: 100%;
+                width:40%;
+                height:40%;
+            }
+
+            @-webkit-keyframes animatetop {
+                from {top:-300px; opacity:0} 
+                to {top:0; opacity:1}
+            }
+
+            @keyframes animatetop {
+                from {top:-300px; opacity:0}
+                to {top:0; opacity:1}
+            }
+
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+
+                &:hover, &:focus{
+                    color: #000;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            }
+
+        }
+    }
+
     div.layout{
-    	position: fixed;
-    	background-color: rgba(0, 0, 0, 0.6);
-    	border: 1px solid black;
-    	filter: alpha(opacity=60);
-    	width: 70%;
-    	padding-bottom: 20px;
-    	height: 80%;
-    	bottom: 30%;
-    	border-radius: 12px;
-    	top:100px;
-    	text-align: center;
-    	overflow: auto;
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.6);
+        border: 1px solid black;
+        filter: alpha(opacity=60);
+        width: 70%;
+        padding-bottom: 20px;
+        height: 80%;
+        bottom: 30%;
+        border-radius: 12px;
+        top:100px;
+        text-align: center;
+        overflow: auto;
 
-    	&::-webkit-scrollbar {
-    		display: none;
-    		width: 0px;
-		}
+        &::-webkit-scrollbar {
+            display: none;
+            width: 0px;
+        }
 
 
-    	div.header{
-    		position: fixed;
-    		width: 70%;
-    		background-color: rgb(74, 75, 76);
-		}
+        div.header{
+            position: fixed;
+            width: 70%;
+            background-color: rgb(74, 75, 76);
+        }
 
-		div.content-layout{
-    		padding-top: 60px;
-    		width: 100%;
-    		content: "";
-    		display: table;
-    		clear: both;
+        div.content-layout{
+            padding-top: 60px;
+            width: 100%;
+            content: "";
+            display: table;
+            clear: both;
 
-    		& div{
-    			float: left;
-    			width: 31.95%;
-    			border:thin solid #777;
-    			margin: 0.5em;
-    			height: 600px;
-    			height: 500px;
-    			background-color: rgba(229, 230, 232, 0.6);
-    			border-radius: 12px;
+            & div{
+                float: left;
+                width: 31.95%;
+                border:thin solid #777;
+                margin: 0.5em;
+                height: 600px;
+                height: 500px;
+                background-color: rgba(229, 230, 232, 0.6);
+                border-radius: 12px;
 
-    			& p{
-    				text-align: left;
-    				font-weight: 900;
-    				font-family: OCR A Std, monospace;
-				}
+                & p{
+                    text-align: left;
+                    font-weight: 900;
+                    font-family: OCR A Std, monospace;
+                }
 
-				& img{
-    			    width: 95%;
-    			    height: 350px;
+                & img{
+                    width: 95%;
+                    height: 350px;
                     transition: transform 0.5s;
                     border-radius: 4px;
 
                     &:hover{
                         transform: scale(1.1);
                     }
-				}
+                }
 
                 & a{
                     color: black;
@@ -125,15 +190,15 @@ div.content {
                         color: #521f7c;
                     }
                 }
-			}
-		}
+            }
+        }
 
-		* {
-    		-webkit-box-sizing: border-box;
-    		-moz-box-sizing: border-box;
-    		box-sizing: border-box;
-		}
-	}
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    }
 }
 
 input, select, textarea, button, a{
@@ -166,17 +231,82 @@ div.content_createworkout {
     width: 50%;
     padding: 10px;
 
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+        
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%;
+            height: 80%;
+            border-radius: 9px;
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+
+            h1{
+                font-family: OCR A Std, monospace;
+                weight: 900;
+            }
+            img{
+                border: 3px solid black; 
+                border-radius: 100%;
+                width:40%;
+                height:40%;
+            }
+
+            @-webkit-keyframes animatetop {
+                from {top:-300px; opacity:0} 
+                to {top:0; opacity:1}
+            }
+
+            @keyframes animatetop {
+                from {top:-300px; opacity:0}
+                to {top:0; opacity:1}
+            }
+
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+
+                &:hover, &:focus{
+                    color: #000;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            }
+
+        }
+    }
+    
     div.layout_createworkout{
-    	position: fixed;
-    	background-color: rgba(0, 0, 0, 0.6);
-    	border: 1px solid black;
-    	filter: alpha(opacity=60);
-    	width: 50%;
-    	padding-bottom: 20px;
-    	height: 80%;
-    	bottom: 30%;
-    	border-radius: 12px;
-    	top:100px;
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.6);
+        border: 1px solid black;
+        filter: alpha(opacity=60);
+        width: 50%;
+        padding-bottom: 20px;
+        height: 80%;
+        bottom: 30%;
+        border-radius: 12px;
+        top:100px;
 
         h1{
             font-family: OCR A Std, monospace;
