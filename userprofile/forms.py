@@ -3,44 +3,48 @@ from django.contrib.auth.models import User
 from django import forms
 from django.core.exceptions import ValidationError
 
-class RegisterForm(forms.Form):
-    username = forms.CharField(min_length=4, max_length=150)
-    email = forms.EmailField()
-    password1 = forms.CharField( widget=forms.PasswordInput)
-    password2 = forms.CharField( widget=forms.PasswordInput)
-    first_name = forms.CharField()
-    last_name = forms.CharField()
+class RegisterForm(forms.ModelForm):
+
+    repassword = forms.CharField( widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+        fields = ['username', 'email', 'password', 'first_name', 'last_name']
 
     def clean_username(self):
-        username = self.cleaned_data['username'].lower()
-        r = User.objects.filter(username=username)
-        if r.exists():
-            raise  ValidationError("Username already exists")
-        return username
+        # check if username data exists first before doing anything to it
+        username_get = self.cleaned_data.get('username').lower()
+        username_exist = User.objects.filter(username=username_get)
+        if username_exist.exists():
+            raise  forms.ValidationError("Username already exists")
+        return username_get
 
     def clean_email(self):
-        email = self.cleaned_data['email'].lower()
-        r = User.objects.filter(email=email)
-        if r.exists():
+        # check if the email data is provided first before doing anything
+        email_get = self.cleaned_data.get('email').lower()
+        email_exist = User.objects.filter(email=email_get)
+        if email_exist.exists():
             raise  ValidationError("Email already exists")
-        return email
-    def clean_password2(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
+        return email_get
 
-        if password1 and password2 and password1 != password2:
+
+    def clean_repassword(self):
+
+        super(RegisterForm,self).clean()
+        password_get = self.cleaned_data.get('password')
+        repassword_get = self.cleaned_data.get('repassword')
+
+        if password_get and repassword_get and password_get != repassword_get:
             raise ValidationError("Password don't match")
 
-        return password2
+        return self.cleaned_data
 
-    def save(self, commit=True):
+    def save(self):
         user = User.objects.create_user(
-            self.cleaned_data['username'],
-            self.cleaned_data['email'],
-            self.cleaned_data['password1']
+            username=self.cleaned_data.get('username'),
+            email=self.cleaned_data.get('email'),
+            password=self.cleaned_data['password'],
+            first_name=self.cleaned_data.get('first_name'),
+            last_name=self.cleaned_data.get('last_name')
         )
         return user

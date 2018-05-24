@@ -1,63 +1,36 @@
-
 {% extends 'base.html' %}
-{ % block content % }
-
-
-
- <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600'>
-<link rel="stylesheet" type="text/css" href="../static/userprofile/style1.css" />
-
-<div class="cont_principal">
-
-  <div class="cont_centrar">
-  <div class="cont_login">
-    <form action="">
-    <div class="cont_tabs_login">
-      <ul class='ul_tabs'>
-        <li class="active"><a href="#" onclick="sign_in()">SIGN IN</a>
-        <span class="linea_bajo_nom"></span>
-        </li>
-        <li><a href="#up" onclick="sign_up()">SIGN UP</a><span class="linea_bajo_nom"></span>
-        </li>
-      </ul>
-      </div>
-  <div class="cont_text_inputs">
-      <input v-model="newUser.username" class="input_form_sign " placeholder="USERNAME" name="name_us" />
-    <input v-model="newUser.first_name" class="input_form_sign " placeholder="FIRST NAME" name="name_us" />
-    <input v-model="newUser.last_name" class="input_form_sign " placeholder="LAST NAME" name="name_us" />
-    <input type="text" class="input_form_sign d_block active_inp" placeholder="EMAIL" name="emauil_us" />
-
-    <input type="password" class="input_form_sign d_block  active_inp" placeholder="PASSWORD" name="pass_us" />  
-   <input type="password" class="input_form_sign" placeholder="CONFIRM PASSWORD" name="conf_pass_us" />
-    
-    <a href="#" class="link_forgot_pass d_block" >Forgot Password ?</a>    
-<div class="terms_and_cons d_none">
-    <p><input type="checkbox" name="terms_and_cons" /> <label for="terms_and_cons">Accept  Terms and Conditions.</label></p>
-  
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "userprofile/stylesheets/asd.css" %}" />
+<div class="container">
+    <div class="login">
+        <h1>Sign up</h1>
+        <div class="log">
+            <form method="post" action="{% url 'user:register' %}">
+            {% csrf_token %}
+            <span>{{ form.errors.username.as_text }}</span>
+            <input name="{{ form.username.name }}" class="register_input" placeholder="Username"><br>
+            <input type="password" name="{{ form.password.name }}" class="register_input" placeholder="Password"><br>
+            <span>{{ form.errors.repassword.as_text }}</span>
+            <input type="password" name="{{ form.repassword.name }}" class="register_input" placeholder="Confirm Password"><br>
+            <span>{{ form.errors.email.as_text }}</span>
+            <input name="{{ form.email.name }}" class="register_input" placeholder="Email"><br>
+            <input name="{{ form.first_name.name }}" class="register_input" placeholder="First Name"><br>
+            <input name="{{ form.last_name.name }}" class="register_input" placeholder="Last Name"><br>
+            <button id="register">Register</button>
+            <a id="register" href="/">Login</a>
+            </form>
+        </div>
     </div>
-      </div>
-<div class="cont_btn">
-     <button class="btn_sign">SIGN IN</button>
-      
-      </div>
-      
-    </form>
-    </div>
-    
-  </div>
-  
-
 </div>
+{% endblock %}
 
-
-<script  src="../static/userprofile/index1.js"></script>
-
-{ % endblock % }
 {% block js %}
 {% verbatim %}
-    <script type="text/javascript">
+<!--     <script type="text/javascript">
         var app = new Vue({
-            el: "#login",
+            delimiters: ["[[","]]"],
+            el: ".log",
             data: function(){
                 return{
                     users: [],
@@ -68,7 +41,6 @@
                         email: '',
                         password: '',
                 },
-                currentUser: {}
                 }
             },
 
@@ -96,32 +68,8 @@
 
                         });
                 },
-
             }
         })
-    </script>
+    </script> -->
 {% endverbatim %}
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
