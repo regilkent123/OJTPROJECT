@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
@@ -43,7 +43,8 @@ class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
     redirect_field_name = ''
     pattern_name = 'workoutdetails'
 
-    def get_redirect_url(self,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
         work = Workout.objects.get(pk=kwargs['pk'])
-        return render(request,template_name,{'workout':work})
+        return render(request, self.template_name,{'workout':work})
+
 # Create your views here.
