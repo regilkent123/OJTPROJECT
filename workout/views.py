@@ -37,9 +37,13 @@ class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
             return HttpResponseRedirect('/workout/')
         return render(request, self.template_name, {'form': form})
 
-
-def getwork(request,pk):
+class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout_details.html'
-    work = Workout.objects.get(pk=pk)
-    return render(request,template_name,{'workout':work})
+    login_url = '/login/'
+    redirect_field_name = ''
+    pattern_name = 'workoutdetails'
+
+    def get_redirect_url(self,*args,**kwargs):
+        work = Workout.objects.get(pk=kwargs['pk'])
+        return render(request,template_name,{'workout':work})
 # Create your views here.
