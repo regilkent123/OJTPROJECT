@@ -1,6 +1,6 @@
 body {
 	background: white url("images/exercise.jpg");
-	 background-repeat: no-repeat;
+	background-repeat: no-repeat;
 	background-size: 100%;
 }
 
@@ -19,7 +19,7 @@ body {
     width: 20%;
     right: 40%;
     padding-bottom: 20px;
-    height: 500px;
+    height: 550px;
     bottom: 30%;
     border-radius: 12px;
 }
@@ -36,7 +36,7 @@ img{
 	top: 100%;
 }
 
-input#register_input{
+input.register_input{
     width: 80%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -47,7 +47,8 @@ input#register_input{
     font-size: 20px;
     text-align: center;
 }
-input#login_input{
+
+input.login_input{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

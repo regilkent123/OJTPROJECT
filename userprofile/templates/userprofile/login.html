@@ -1,23 +1,21 @@
-
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static "userprofile/styles.css" %}" />
-
-
+<link rel="stylesheet" type="text/css" href="{% static "userprofile/stylesheets/asd.css" %}" />
 <div class="container">
-    <form method="post" action="/loggedin/">
-        {% csrf_token %}
         <div class="login">
             <div id="logo"><img src="{% static "userprofile/images/edit.png" %}">
             </div>
+            <form method="post" action="{% url 'user:login' %}">
+            {% csrf_token %}
             <div id= loginform>
-            <input type="text" id="login_input" name="username" placeholder="username"><br>
-            <input type="password" id="login_input" name="password" placeholder="password"><br>
-            <button>Login</button><a href="/register">Sign up here</a>
+            <input type="text" class="login_input" name="username" placeholder="username"><br>
+            <input type="password" class="login_input" name="password" placeholder="password"><br>
+            <button type="submit" id="login">Login</button>
+            <a id="signup" href="{% url 'user:register' %}">Signup here</a>
+            </form>
             </div>
         </div>
-    </form>
 </div>
 
 {% endblock %}
