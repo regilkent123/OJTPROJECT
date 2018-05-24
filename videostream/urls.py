@@ -9,5 +9,9 @@ urlpatterns = [
     # path('startArchive/', views.startArchive, name='startArchive'),
     # path('endArchive/', views.endArchive, name='endArchive'),
 
+    # path('workout/', views.WorkoutView.as_view(), name='workout'),
+    # path('home/', views.HomeView.as_view(), name='home'),
+    # path('createworkout/', views.CreateWorkoutView.as_view(), name='createworkout'),
+
 
 ]

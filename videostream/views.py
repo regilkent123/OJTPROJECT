@@ -13,71 +13,39 @@ api_secret = "06742bb12faa60106b61af9bcfe82ffc211ca161"
 
 opentok = OpenTok(api_key, api_secret)
 
+# usually ang name sa mga ingon ani nga view kay `Mixins`
 class ForFitView(View):
 
     def dispatch(self, *args, **kwargs):
-        
-        session = opentok.create_session(media_mode=MediaModes.routed,
-            archive_mode=ArchiveModes.always)
-    
-    
-        sessions = Session(session_id=session.session_id)
-        sessions.save()
-        session_id=session.session_id
-        print ('session id:', session_id)
-        # session_id = Session.objects.get(pk=1).session_id
+        print ('hello from the other side')
+
         return super().dispatch(*args, **kwargs)
 
-    # def dispatch(self, request, *args, **kwargs):
-    #     # context = {}
-    #     session = opentok.create_session(media_mode=MediaModes.routed,
-    #         archive_mode=ArchiveModes.always)
-    #
-    #
-    #     sessions = Session(session_id=session.session_id)
-    #     sessions.save()
-    #
-    #     session_id = Session.objects.get(pk=1).session_id
-    #     return (session_id)
-
-
 class PublishVideoView(ForFitView):
-        # and here we will override it again
+
+
     def dispatch(self, *args, **kwargs):
         print ('hello from the side B')
-        # we call the original dispatch function here so it will act the same
-        # as the regular View. same pud diri
+       
         return super(PublishVideoView, self).dispatch(*args, **kwargs)
 
 
     def get(self, request, *args, **kwargs):
         
-    #     self. token = opentok.generate_token(sessions)
-    #     content = {
-    #         'api_key': api_key,
-    #         'session_id': sessions,
-    #         'token': token,
-    #     }
-
-        # return render(request, 'videostream/publisher.html', content)
         return render(request, 'videostream/publisher.html', {})
 
 
 class SubscribeVideoView(ForFitView):
+    pass
+    # def get(request):
 
-    def get(request):
-
-        # token = opentok.generate_token(
-        # session_id,
-        # role=Roles.subscriber
-        # )
-        token= session.generate_token()
-        content = {
-            'api_key': api_key,
-            'session_id': session_id,
-            'token': token,
-        }
-        return render(request, 'videostream/subscriber.html', content)
+    #     token= session.generate_token()
+    #     content = {
+    #         'api_key': api_key,
+    #         'session_id': session_id,
+    #         'token': token,
+    #     }
+    #     return render(request, 'videostream/subscriber.html', content)
 
 class HomeView(TemplateView):
     template_name = 'videostream/lvs.html'

@@ -1,14 +1,58 @@
-from django.shortcuts import render, redirect
 
+from django.shortcuts import render
 from django.views import generic
-
+from django.contrib.auth import authenticate, login
+from django.urls import reverse
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.models import User
+from django.views.generic import ListView
+from django.contrib.auth.forms import UserCreationForm
+from .forms import RegisterForm
 
 class RegisterView(generic.TemplateView):
     template_name = 'userprofile/register.html'
+    form_class = RegisterForm
+ 
+
+    def get(self, request, *args, **kwargs):
+
+        return HttpResponseRedirect('/afterlogin/')
+
+
+    def post(self,request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=raw_password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect('/afterlogin/')
+        return render(request, self.template_name, {'form': form})
+
+
+
+
+
 
 class LoginView(generic.TemplateView):
     template_name = 'userprofile/login.html'
 
+
+def auth_login(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+
+        auth_user = authenticate(username=username, password=password)
+
+        if auth_user is not None:
+            login(request, auth_user)
+            return HttpResponseRedirect('/afterlogin/')
+        else :
+            return HttpResponse('error')
+    return HttpResponse('not allowed')
 
 class AfterLoginView(generic.TemplateView):
     template_name = 'userprofile/loggedin.html'
@@ -18,33 +62,3 @@ class InvalidLoginView(generic.TemplateView):
 
 class LogOutView(generic.TemplateView):
     template_name = 'userprofile/logout.html'
-
-class VideoStreamView(generic.TemplateView):
-    template_name = 'videostreaming/vs.html'
-
-# def login(request):
-#     c= {}
-#     c.update(csrf(request))
-#     return render_to_request('login.html',c)
-# def auth_view(request):
-#     username=request.POST.get('username','')
-#     password=request.POST.get('password','')
-#     user=auth.authenticate(username=username, password=password)
-
-#     if user is not None:
-#         auth.login(request,user)
-#         return HttpResponseRedirect('login/')
-#     else :
-#         return HttpResponseRedirect('invalidlogin/')
-
-# def loggedin(request)
-#     return render_to_response('loggedin.html',{'full_name' request.user.username})
-
-# def invalid_login(request)
-#     return to render_to_response('invalid_login.html')
-
-# def logout(request)
-#     auth.logout(request)
-#     return to render_to_response('logout.html')
-# # Create your views here.
-

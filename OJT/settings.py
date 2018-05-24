@@ -32,10 +32,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'workout.apps.WorkoutConfig',
-
-
-    # 'userprofile.apps.UserprofileConfig',
+    # 'livestream.apps.LivestreamConfig',
+    'userprofile.apps.UserprofileConfig',
     'videostream.apps.VideostreamConfig',
+    'video.apps.VideoConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
 ]
+# AUTH_USER_MODEL= 'OJT.UserProfile'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,3 +128,6 @@ STATIC_URL = '/static/'
 
 
 LOGIN_REDIRECT_URL = 'home'
+
+
+

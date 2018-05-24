@@ -1,0 +1,185 @@
+body {
+    background: url("images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: 3023px * 2018px;
+}
+
+div.content {
+    text-align: center;
+    margin: auto;
+    width: 70%;
+    padding: 10px;
+}
+
+div.layout{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid black;
+    filter: alpha(opacity=60);
+    width: 70%;
+    padding-bottom: 20px;
+    height: 80%;
+    bottom: 30%;
+    border-radius: 12px;
+    top:100px;
+    text-align: center;
+    overflow: auto;
+}
+
+div.content_createworkout {
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+div.layout_createworkout{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid black;
+    filter: alpha(opacity=60);
+    width: 50%;
+    padding-bottom: 20px;
+    height: 80%;
+    bottom: 30%;
+    border-radius: 12px;
+    top:100px;
+}
+
+h1{
+    font-family: OCR A Std, monospace;
+    color: white;
+    font-size: 50px;
+}
+
+ul{
+    position: fixed;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333; 
+    width: 100%;
+    right: 1px;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 30px;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+a{
+    font-family: OCR A Std, monospace;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.createworkout{
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #a31d0b;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 30px;
+    text-align: center;
+
+}
+
+.active {
+    background-color:#a31d0b;
+}
+
+select.createworkout{
+    background: rgba(0,0,0,0.3);
+}
+
+input, select, textarea{
+    color: white;
+    font-family: OCR A Std, monospace;
+}
+
+::placeholder {
+    color: white;
+    opacity: 0.6;
+}
+
+button {
+    background-color: #a31d0b;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family: OCR A Std, monospace;
+}
+
+
+textarea{
+    resize: none;
+}
+
+
+div.header{
+    position: fixed;
+    width: 70%;
+    background-color: rgb(74, 75, 76);
+}
+
+div.content-layout{
+    padding-top: 60px;
+    width: 100%;
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.content-layout div{
+    float: left;
+    width: 31.95%;
+    border:thin solid #777;
+    margin: 0.5em;
+    height: 600px;
+    height: 500px;
+    background-color: rgba(229, 230, 232, 0.6);
+    border-radius: 12px;
+}
+
+.content-layout div p{
+    text-align: left;
+    font-weight: 900;
+    font-family: OCR A Std, monospace;
+}
+
+.content-layout div img{
+    width: 95%;
+    height: 350px;
+
+}
+
+::-webkit-scrollbar {
+    display: none;
+    width: 0px;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
