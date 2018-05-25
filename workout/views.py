@@ -1,21 +1,29 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import WorkoutForm
 from workout.models import Workout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class WorkoutView(generic.TemplateView):
+class WorkoutView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout.html'
+    login_url = '/login/'
+    redirect_field_name = ''
 
-class HomeView(generic.TemplateView):
+class HomeView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/home.html'
+    login_url = '/login/'
+    redirect_field_name = ''
 
-class CreateWorkoutView(generic.TemplateView):
+class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/createworkout.html'
     initial = {'key': 'value'}
     form_class = WorkoutForm
+    login_url = '/login/'
+    redirect_field_name = ''
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
@@ -29,11 +37,14 @@ class CreateWorkoutView(generic.TemplateView):
             return HttpResponseRedirect('/workout/')
         return render(request, self.template_name, {'form': form})
 
-
-
-def getwork(request,pk):
+class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout_details.html'
-    work = Workout.objects.get(pk=pk)
+    login_url = '/login/'
+    redirect_field_name = ''
+    pattern_name = 'workoutdetails'
 
-    return render(request,template_name,{'workout':work})
+    def get(self, request, *args, **kwargs):
+        work = Workout.objects.get(pk=kwargs['pk'])
+        return render(request, self.template_name,{'workout':work})
+
 # Create your views here.

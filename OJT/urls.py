@@ -22,9 +22,7 @@ from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('workout.urls')),
-    path('', include('videostream.urls')),
-    path('', include('video.urls')),
+    path('home/', include('workout.urls')),
     path('', include('userprofile.urls')),
     path('api/', include(router.urls)),
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT,})

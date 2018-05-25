@@ -32,14 +32,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'workout.apps.WorkoutConfig',
-<<<<<<< HEAD
     # 'livestream.apps.LivestreamConfig',
-    'userprofile.apps.UserprofileConfig',
     'videostream.apps.VideostreamConfig',
     'video.apps.VideoConfig',
-=======
     'userprofile.apps.UserprofileConfig',
->>>>>>> 10b635bbbb73c4f531a907defc1acfb798a7f203
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
