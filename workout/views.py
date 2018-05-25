@@ -46,7 +46,7 @@ class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/workout/')
+            return HttpResponseRedirect('/home/workout/')
         return render(request, self.template_name, {'form': form})
 
 class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
