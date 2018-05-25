@@ -7,6 +7,7 @@ from .forms import WorkoutForm
 from workout.models import Workout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from userprofile.forms import UserProfileForm
 
 class WorkoutView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout.html'
@@ -15,8 +16,20 @@ class WorkoutView(LoginRequiredMixin,generic.TemplateView):
 
 class HomeView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/home.html'
+    initial = {'key': 'value'}
     login_url = '/login/'
     redirect_field_name = ''
+    form_class = UserProfileForm
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+        return render(request, self.template_name, {'form': form})
 
 class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/createworkout.html'
@@ -27,7 +40,6 @@ class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
-        print(form.fields['workout_type'].choices)
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs) :
