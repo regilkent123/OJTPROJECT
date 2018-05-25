@@ -71,8 +71,6 @@ div.content {
         background-color: rgb(0,0,0); /* Fallback color */
         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 
-        
-
         .modal-content {
             background-color: #fefefe;
             margin: auto;
@@ -86,15 +84,59 @@ div.content {
             animation-name: animatetop;
             animation-duration: 0.4s;
 
-            h1{
+            .userprofile-forms{
+                display: none;
+                position: relative;
+                width: 30%;
+                left: 35%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                border: none;
+                border-bottom: 2px solid #a31d0b;
+                background-color: rgba(0, 0, 0, 0);
+                font-size: 24px 24px 24px 24px;
+
+                &:focus{
+                border-bottom: 2px solid complement(#a31d0b);
+                outline: none;
+
+                    &::-webkit-input-placeholder {
+                        opacity: 0;
+                    }
+                }
+            }
+
+            .form-saves{
+                position: relative;
+                display: none;
+                float: right;
+                height: 30px;
+                width: 60px;
+                background-color: #00b545;
+                padding: 1px;
+                bottom: 6%;
+                right: 25%;
+
+                    &:hover{
+                        background-color: #3dff87;
+                    }
+            }
+
+            h1,h2,select,input{
                 font-family: OCR A Std, monospace;
                 weight: 900;
+                color: black;
+            }
+
+            select option{
+                color: black;
             }
             img{
                 border: 3px solid black; 
                 border-radius: 100%;
-                width:40%;
-                height:40%;
+                width:35%;
+                height:35%;
             }
 
             @-webkit-keyframes animatetop {
@@ -119,7 +161,6 @@ div.content {
                     cursor: pointer;
                 }
             }
-
         }
     }
 
@@ -148,6 +189,7 @@ div.content {
 
         .info-header{
             position: fixed;
+            top: 10px;
             text-align: left;
             background-color: white;
             width: 100%;

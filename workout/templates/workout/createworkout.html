@@ -16,6 +16,14 @@
             <span class="close">&times;</span>
             <p><h1>PROFILE PAGE</h1></p>
             <img src="{% static "workout/images/pewds.jpg" %}" id="user">
+            <p><h2>{{ user.first_name }} {{user.last_name }}</h2></p>
+            <p><h2>{{ user.email }}</h2></p>
+            <p><h2> <label>Gender:</label> {{ user.userprofile.gender }} <i class="fa fa-edit"></i></h2></p>
+            <p><h2> <label>User Type:</label> {{ user.userprofile.usertype }} <i class="fa fa-edit"></i></h2></p>
+            <p><h2> <label>Birthday:</label> {{ user.userprofile.birthday }} <i class="fa fa-edit"></i></h2></p>
+            <p><h2> <label>Address:</label> {{ user.userprofile.address }} <i class="fa fa-edit"></i></h2></p>
+            <p><h2> <label>Height:</label> {{ user.userprofile.height }} <i class="fa fa-edit"></i></h2></p>
+            <p><h2> <label>Weight:</label> {{ user.userprofile.weight }} <i class="fa fa-edit"></i></h2></p>
         </div>
     </div>
     <div id="layout_createworkout" class = "layout_createworkout">

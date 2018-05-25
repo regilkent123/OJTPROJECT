@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.core.exceptions import ValidationError
+from .models import UserProfile
 
 class RegisterForm(forms.ModelForm):
 
@@ -48,3 +49,16 @@ class RegisterForm(forms.ModelForm):
             last_name=self.cleaned_data.get('last_name')
         )
         return user
+
+class UserProfileForm(forms.ModelForm): 
+
+    class Meta:
+        model = UserProfile
+        fields = ['usertype', 'address', 'gender', 'height', 'weight']
+        widgets = {
+            'address': forms.Textarea(attrs={'cols':10, 'rows':20})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        self.fields['gender'].empty_label =  None
