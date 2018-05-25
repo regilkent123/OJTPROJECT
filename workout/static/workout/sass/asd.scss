@@ -191,12 +191,13 @@ div.content {
             position: fixed;
             top: 10px;
             text-align: left;
-            background-color: white;
             width: 100%;
             .info{
                 padding-bottom: 10px;
                 background-color: #a31d0b;
-                overflow: hidden;
+                position: relative;
+                top: 80px;
+                padding: 10px;
                 h1{
                     font-size: 1.3em;
                     font-family: calibri, arial;
