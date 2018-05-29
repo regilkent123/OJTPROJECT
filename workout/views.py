@@ -8,11 +8,26 @@ from workout.models import Workout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from userprofile.forms import UserProfileForm
+from userprofile.serializers import UserProfileSerializer
+from rest_framework.renderers import TemplateHTMLRenderer
 
 class WorkoutView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout.html'
     login_url = '/login/'
     redirect_field_name = ''
+
+    def get(self, request, *args, **kwargs):
+        profile = request.user.userprofile
+        serializer = UserProfileSerializer(profile)
+        return render(request, self.template_name, {'serializer': serializer})
+
+    def post(self, request, *args, **kwargs):
+        profile = request.user.userprofile
+        serializer = UserProfileSerializer(profile, request.POST)
+        print (serializer.is_valid(), serializer.errors)
+        if serializer.is_valid():
+            serializer.save()
+        return render(request, self.template_name, {'serializer': serializer})
 
 class HomeView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/home.html'
@@ -22,14 +37,18 @@ class HomeView(LoginRequiredMixin,generic.TemplateView):
     form_class = UserProfileForm
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {'form': form})
+        profile = request.user.userprofile
+        serializer = UserProfileSerializer(profile)
+        return render(request, self.template_name, {'serializer': serializer})
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-        return render(request, self.template_name, {'form': form})
+        profile = request.user.userprofile
+        serializer = UserProfileSerializer(profile, request.POST)
+        print (serializer.is_valid(), serializer.errors)
+        if serializer.is_valid():
+            serializer.save()
+        return render(request, self.template_name, {'serializer': serializer})
+        
 
 class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/createworkout.html'
@@ -39,15 +58,21 @@ class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
     redirect_field_name = ''
 
     def get(self, request, *args, **kwargs):
+        profile = request.user.userprofile
+        serializer = UserProfileSerializer(profile)
         form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form,'serializer': serializer})
 
     def post(self, request, *args, **kwargs) :
         form = self.form_class(request.POST, request.FILES)
+        profile = request.user.userprofile
+        serializer = UserProfileSerializer(profile, request.POST)
+        if serializer.is_valid():
+            serializer.save()
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/home/workout/')
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form,'serializer': serializer})
 
 class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout_details.html'
@@ -57,6 +82,16 @@ class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         work = Workout.objects.get(pk=kwargs['pk'])
-        return render(request, self.template_name,{'workout':work})
+        profile = request.user.userprofile
+        serializer = UserProfileSerializer(profile)
+        return render(request, self.template_name,{'workout':work,'serializer': serializer})
+
+    def post(self, request, *args, **kwargs):
+        profile = request.user.userprofile
+        serializer = UserProfileSerializer(profile, request.POST)
+        print (serializer.is_valid(), serializer.errors)
+        if serializer.is_valid():
+            serializer.save()
+        return render(request, self.template_name, {'serializer': serializer})
 
 # Create your views here.
