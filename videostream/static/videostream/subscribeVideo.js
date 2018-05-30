@@ -33,7 +33,7 @@ if(OT.checkSystemRequirements() == 1){
     errorMessage.textContent = 'No streams are available';
   });
 }
-else // Failed to launch the livestream.
+else 
   console.log('Failed');
 
 

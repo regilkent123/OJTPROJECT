@@ -1,3 +1,7 @@
+console.log('Session ID: ' + sessionId);
+console.log('Token: ' + token);
+
+
 var session, publisher;
 var HAS_PUBLISH = false;
 
@@ -5,7 +9,6 @@ if (OT.checkSystemRequirements() == 1) {
   session = OT.initSession(apiKey, sessionId);
 
   session.connect(token, function(error) {
-    // If the connection is successful, initialize a publisher and publish to the session
     if (error) {
       console.log("Cannot connect to the session.");
     }
@@ -14,8 +17,8 @@ if (OT.checkSystemRequirements() == 1) {
 
       publisher = OT.initPublisher('publisher', {insertMode: 'append', width:'50%', height:'50%'});
 
-      start_button = document.getElementById("start");
-      stop_button = document.getElementById("stop");
+      start_button = document.getElementById("1");
+      stop_button = document.getElementById("2");
 
       StartPublish(start_button);
       StopPublish(stop_button);

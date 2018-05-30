@@ -72,13 +72,16 @@ class HomeView(LoginRequiredMixin,generic.TemplateView):
 
 
 class startArchiveView(ForFitView):
+    
     session_id=Session.objects.first()
+    print(session_id)
 
     def get(self, request, *args, **kwargs):
         print("Start archive")
         archive = opentok.start_archive(
             self.session_id,
             has_video=True,
+            has_audio=True,
             name='Videos',
             output_mode=OutputModes.individual
         )
@@ -92,5 +95,6 @@ class endArchiveView(ForFitView):
     def get(self, request, *args, **kwargs):
 
         archive_id = Archive.objects.get(pk=Archive.objects.count()).archive_id
+        print(archive_id)
         opentok.stop_archive(archive_id)
         return HttpResponse('Stop recording')
