@@ -13,7 +13,6 @@ from rest_framework.renderers import TemplateHTMLRenderer
 
 class WorkoutView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout.html'
-    login_url = '/login/'
     redirect_field_name = ''
 
     def get(self, request, *args, **kwargs):
@@ -32,7 +31,6 @@ class WorkoutView(LoginRequiredMixin,generic.TemplateView):
 class HomeView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/home.html'
     initial = {'key': 'value'}
-    login_url = '/login/'
     redirect_field_name = ''
     form_class = UserProfileForm
 
@@ -54,7 +52,6 @@ class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/createworkout.html'
     initial = {'key': 'value'}
     form_class = WorkoutForm
-    login_url = '/login/'
     redirect_field_name = ''
 
     def get(self, request, *args, **kwargs):
@@ -76,7 +73,6 @@ class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
 
 class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout_details.html'
-    login_url = '/login/'
     redirect_field_name = ''
     pattern_name = 'workoutdetails'
 
@@ -89,7 +85,6 @@ class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
     def post(self, request, *args, **kwargs):
         profile = request.user.userprofile
         serializer = UserProfileSerializer(profile, request.POST)
-        print (serializer.is_valid(), serializer.errors)
         if serializer.is_valid():
             serializer.save()
         return render(request, self.template_name, {'serializer': serializer})

@@ -53,7 +53,9 @@
     <div id="layout" class = "layout">
         <div class="header">
             <form action="{% url 'user:createworkout' %}">
+            {% if user.userprofile.usertype == 2 %}
             <button id="createworkout" style="float:right">CREATE WORKOUT</button>
+            {% endif %}
             </form>
         </div>
         <div class="content-layout">
