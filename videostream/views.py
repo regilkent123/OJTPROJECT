@@ -93,5 +93,4 @@ class endArchiveView(ForFitView):
 
         archive_id = Archive.objects.get(pk=Archive.objects.count()).archive_id
         opentok.stop_archive(archive_id)
-        print("End archive")
         return HttpResponse('Stop recording')

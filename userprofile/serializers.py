@@ -10,8 +10,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = '__all__'
 
-    usertype = serializers.CharField(source = 'get_usertype_display')
-    gender = serializers.CharField(source = 'get_gender_display')
+    usertype = serializers.CharField(source='get_usertype_display')
+    gender = serializers.CharField(source='get_gender_display')
 
 class UserSerializer(serializers.ModelSerializer):
     detail_url = serializers.CharField(read_only=True)
