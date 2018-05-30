@@ -7,4 +7,3 @@ class CreateProfileTestCase(TestCase):
     	user = User.objects.create_user(username='asd', password='asd')
     	print(user.userprofile)
 # Create your tests here.
-#churva

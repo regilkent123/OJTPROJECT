@@ -6,7 +6,7 @@
     <div class="login">
         <h1>Sign up</h1>
         <div class="log">
-            <form method="post" action="{% url 'user:register' %}">
+            <form method="post" action="{% url 'login:register' %}">
             {% csrf_token %}
             <span>{{ form.errors.username.as_text }}</span>
             <input name="{{ form.username.name }}" class="register_input" placeholder="Username"><br>
@@ -18,7 +18,7 @@
             <input name="{{ form.first_name.name }}" class="register_input" placeholder="First Name"><br>
             <input name="{{ form.last_name.name }}" class="register_input" placeholder="Last Name"><br>
             <button id="register">Register</button>
-            <a id="register" href="/">Login</a>
+            <a id="register" href="{% url 'login:login' %}">Login</a>
             </form>
         </div>
     </div>

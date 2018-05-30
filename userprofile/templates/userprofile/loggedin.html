@@ -3,8 +3,8 @@
 {% block content %}
 
 <h2>Hi {{full_name}} You are now logged in!</h2>
-<form method="post" action="{% url 'user:logout' %}">
-<p> Click <a href="{% url 'user:logout' %}"> here </a> to log out.</p>
+<form method="post" action="{% url 'login:logout' %}">
+<p> Click <a href="{% url 'login:logout' %}"> here </a> to log out.</p>
 </form>
 
 

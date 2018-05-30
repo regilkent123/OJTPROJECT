@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+{% load rest_framework %}
 <link rel="stylesheet" type="text/css" href="{% static "workout/stylesheets/asd.css" %}" />
 <div class="navbar">
     <ul>
         <li><a href="{% url 'user:home' %}">Home</a></li>
         <li><a class="active" href="{% url 'user:workout' %}">Workout</a></li>
         <li><a class="user"><img src="{% static "workout/images/user.png" %}" id="user"></a></li>
-        <li style="float:right"><a href="">Logout</a></li>
+        <li style="float:right"><a href="{% url 'login:logout' %}">Logout</a></li>
     </ul>
 </div>
 <div class = "content">
@@ -16,12 +17,45 @@
             <span class="close">&times;</span>
             <p><h1>PROFILE PAGE</h1></p>
             <img src="{% static "workout/images/pewds.jpg" %}" id="user">
+            <p><h2>{{ user.first_name }} {{user.last_name }}</h2></p>
+            <p><h2>{{ user.email }}</h2></p>
+            <form method="post" action="{% url 'user:workout' %}">
+                {% csrf_token %}
+            <select name="{{serializer.user.name}}" id="" class="userprofile-forms">
+                <option value="{{ user.userprofile.user.pk }}"></option>
+            </select>
+            <p><h2 id="gender-display"> <label >Gender:</label> {{ user.userprofile.get_gender_display }} <i id="icon-gender" class="fa fa-edit"></i></h2></p>
+            <select name="{{serializer.gender.name}}" id="gender-form" class="userprofile-forms">
+                <option value="{{ user.userprofile.gender }}">Gender</option>
+            {% for value, label in serializer.gender.choices.items %}
+                <option value="{{value}}">{{label}}</option>
+            {% endfor %}
+            </select>
+            <p><h2 id="usertype-display"> <label>User Type:</label> {{ user.userprofile.get_usertype_display }} <i id="icon-usertype" class="fa fa-edit"></i></h2></p>
+            <select name="{{ serializer.usertype.name }}" id="usertype-form" class="userprofile-forms">
+                <option value="{{ serializer.usertype.value }}">User Type</option>
+            {% for value, label in serializer.usertype.choices.items %}
+                <option value="{{value}}">{{label}}</option>
+            {% endfor %}
+            </select>
+            <p><h2 id="birthday-display"> <label>Birthday:</label> {{ user.userprofile.birthdate }} <i id="icon-birthday" class="fa fa-edit"></i></h2></p>
+            <input type="date" name="{{ serializer.birthdate.name }}" id="birthday-form" class="userprofile-forms" value="{{serializer.birthdate.value}}">
+            <p><h2  id="address-display"> <label>Address:</label> {{ user.userprofile.address }} <i id="icon-address" class="fa fa-edit"></i></h2></p>
+            <textarea name="{{ serializer.address.name }}" id="address-form" class="userprofile-forms" value="{{ user.userprofile.address }}">{{ user.userprofile.address }}</textarea>
+            <p><h2  id="height-display"> <label>Height:</label> {{ user.userprofile.height }} <i id="icon-height" class="fa fa-edit"></i></h2></p>
+            <input type="number" name="{{ serializer.height.name }}" id="height-form" class="userprofile-forms" value="{{ user.userprofile.height }}">
+            <p><h2  id="weight-display"> <label>Weight:</label> {{ user.userprofile.weight }} <i id="icon-weight" class="fa fa-edit"></i></h2></p>
+            <input type="number" name="{{ serializer.weight.name }}" id="weight-form" class="userprofile-forms" value="{{ user.userprofile.weight }}">
+            <button class="save-userprofile" id="save-userprofile" onclick="getData(); return false;">save</button>
+            </form>
         </div>
     </div>
     <div id="layout" class = "layout">
         <div class="header">
             <form action="{% url 'user:createworkout' %}">
+            {% if user.userprofile.usertype == 2 %}
             <button id="createworkout" style="float:right">CREATE WORKOUT</button>
+            {% endif %}
             </form>
         </div>
         <div class="content-layout">
@@ -63,8 +97,7 @@
             }
         })
     </script>
-    <script>
-
+<script>
 var modal = document.getElementById('myModal');
 
 var btn = document.getElementById("user");
@@ -73,12 +106,36 @@ var span = document.getElementsByClassName("close")[0];
 
 var content = document.getElementById("layout");
 
- 
+var genderform = document.getElementById("gender-form");
+var editgender = document.getElementById("icon-gender");
+var displaygender = document.getElementById("gender-display");
+
+var usertypeform = document.getElementById("usertype-form");
+var editusertype = document.getElementById("icon-usertype");
+var displayusertype = document.getElementById("usertype-display");
+
+var birthdayform = document.getElementById("birthday-form");
+var editbirthday = document.getElementById("icon-birthday");
+var displaybirthday = document.getElementById("birthday-display");
+
+var addressform = document.getElementById("address-form");
+var editaddress = document.getElementById("icon-address");
+var displayaddress = document.getElementById("address-display");
+
+var heightform = document.getElementById("height-form");
+var editheight = document.getElementById("icon-height");
+var displayheight = document.getElementById("height-display");
+
+var weightform = document.getElementById("weight-form");
+var editweight = document.getElementById("icon-weight");
+var displayweight = document.getElementById("weight-display");
+
+var saveform = document.getElementById("save-userprofile");
+
 btn.onclick = function() {
     modal.style.display = "block";
     content.style.display = "none";
 }
-
 
 span.onclick = function() {
     modal.style.display = "none";
@@ -91,6 +148,53 @@ window.onclick = function(event) {
         modal.style.display = "none";
         content.style.display = "block";
     }
+}
+
+editgender.onclick = function(){
+     genderform.style.display = "block";
+     saveform.style.display = "inline-block";
+     displaygender.style.display = "none";
+}
+
+
+editusertype.onclick = function(){
+     usertypeform.style.display = "block";
+     saveform.style.display = "inline-block";
+     displayusertype.style.display = "none";
+}
+
+
+editbirthday.onclick = function(){
+     birthdayform.style.display = "block";
+     saveform.style.display = "inline-block";
+     displaybirthday.style.display = "none";
+}
+
+
+editaddress.onclick = function(){
+     addressform.style.display = "block";
+     saveform.style.display = "inline-block";
+     displayaddress.style.display = "none";
+}
+
+
+editheight.onclick = function(){
+     heightform.style.display = "block";
+     saveform.style.display = "inline-block";
+     displayheight.style.display = "none";
+}
+
+
+editweight.onclick = function(){
+     weightform.style.display = "block";
+     saveform.style.display = "inline-block";
+     displayweight.style.display = "none";
+}
+
+saveform.onclick = function(){
+    addressform.style.display = "none";
+    saveform.style.display = "none";
+    displayaddress.style.display = "block";
 }
 </script>
 {% endblock %}

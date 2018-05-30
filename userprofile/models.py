@@ -17,7 +17,7 @@ class UserProfile(models.Model):
             (TRAINEE,'Trainee'),
             (TRAINER,'Trainer'),
         )
-    usertype = models.PositiveIntegerField(choices=utype, default=TRAINEE)
+    usertype = models.PositiveIntegerField(choices=utype,blank=False,default=TRAINEE)
     birthdate = models.DateField(blank=True, null=True)
     address = models.CharField(max_length=100, blank=True)
     sex = (

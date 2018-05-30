@@ -27,7 +27,7 @@ class RegisterView(TemplateView):
             user = authenticate(username=username, password=raw_password)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect('/afterlogin/')
+                return HttpResponseRedirect(reverse('user:home'))
             else:
                 form = RegistrationForm()
         return render(request, self.template_name, {'form': form})
@@ -46,7 +46,7 @@ class LoginView(TemplateView):
 
         if auth_user is not None:
             login(request, auth_user)
-            return HttpResponseRedirect('afterlogin')
+            return HttpResponseRedirect(reverse('user:home'))
         else :
             return HttpResponse('error')
         return HttpResponse('not allowed')
@@ -57,7 +57,7 @@ class AfterLoginView(TemplateView):
 class LogOutView(TemplateView):
     def get(self,request):
         logout(request)
-        return HttpResponse('LOGGED OUT!')
+        return HttpResponseRedirect(reverse('login:login'))
 
 
 # Create your views here.

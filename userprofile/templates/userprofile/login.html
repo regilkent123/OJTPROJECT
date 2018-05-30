@@ -6,13 +6,13 @@
         <div class="login">
             <div id="logo"><img src="{% static "userprofile/images/edit.png" %}">
             </div>
-            <form method="post" action="{% url 'user:login' %}">
+            <form method="post" action="{% url 'login:login' %}">
             {% csrf_token %}
             <div id= loginform>
             <input type="text" class="login_input" name="username" placeholder="username"><br>
             <input type="password" class="login_input" name="password" placeholder="password"><br>
             <button type="submit" id="login">Login</button>
-            <a id="signup" href="{% url 'user:register' %}">Signup here</a>
+            <a id="signup" href="{% url 'login:register' %}">Signup here</a>
             </form>
             </div>
         </div>
