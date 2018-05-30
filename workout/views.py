@@ -30,7 +30,6 @@ class WorkoutView(LoginRequiredMixin,generic.TemplateView):
 
 class HomeView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/home.html'
-    initial = {'key': 'value'}
     redirect_field_name = ''
     form_class = UserProfileForm
 
@@ -42,7 +41,6 @@ class HomeView(LoginRequiredMixin,generic.TemplateView):
     def post(self, request, *args, **kwargs):
         profile = request.user.userprofile
         serializer = UserProfileSerializer(profile, request.POST)
-        print (serializer.is_valid(), serializer.errors)
         if serializer.is_valid():
             serializer.save()
         return render(request, self.template_name, {'serializer': serializer})
