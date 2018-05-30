@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', include('workout.urls')),
     path('', include('userprofile.urls')),
+    #path('video/', include('video.urls')),
+    path('video/', include('videostream.urls')),
     path('api/', include(router.urls)),
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT,})
 ]

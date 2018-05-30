@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'workout.apps.WorkoutConfig',
     # 'livestream.apps.LivestreamConfig',
     'videostream.apps.VideostreamConfig',
-    'video.apps.VideoConfig',
+    # 'video.apps.VideoConfig',
     'userprofile.apps.UserprofileConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -137,5 +137,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = 'home'
 
-
-
+OPENTOK_API_KEY = os.getenv("OPENTOK_API_KEY")
+OPENTOK_SECRET_KEY = os.getenv("OPENTOK_SECRET_KEY")

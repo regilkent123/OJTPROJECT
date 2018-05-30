@@ -59,4 +59,3 @@ class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
         work = Workout.objects.get(pk=kwargs['pk'])
         return render(request, self.template_name,{'workout':work})
 
-# Create your views here.
