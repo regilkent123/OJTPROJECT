@@ -1,6 +1,3 @@
-console.log('Session ID: ' + sessionId);
-console.log('Token: ' + token);
-
 var session, publisher;
 var HAS_PUBLISH = false;
 
