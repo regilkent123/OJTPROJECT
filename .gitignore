@@ -1,4 +1,6 @@
-*.pyc
+*/*.pyc
 virtenv/
 venv/
 *.sqlite3
+.sass-cache/
+__pycache__/
