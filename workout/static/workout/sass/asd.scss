@@ -4,8 +4,6 @@ body {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover; 
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 div.navbar{
@@ -85,6 +83,16 @@ div.content {
             -webkit-animation-duration: 0.4s;
             animation-name: animatetop;
             animation-duration: 0.4s;
+            overflow: auto;
+
+            &::-webkit-scrollbar {
+                display: none;
+                width: 0px;
+            }
+
+            .save-userprofile{
+                display: none;
+            }
 
             .userprofile-forms{
                 display: none;
@@ -109,30 +117,16 @@ div.content {
                 }
             }
 
-            .form-saves{
-                position: relative;
-                display: none;
-                float: right;
-                height: 30px;
-                width: 60px;
-                background-color: #00b545;
-                padding: 1px;
-                bottom: 6%;
-                right: 25%;
-
-                    &:hover{
-                        background-color: #3dff87;
-                    }
-            }
-
-            h1,h2,select,input{
+            h1,h2,select,input, textarea{
                 font-family: OCR A Std, monospace;
                 weight: 900;
                 color: black;
             }
-
             select option{
                 color: black;
+            }
+            textarea{
+                resize: none;
             }
             img{
                 border: 3px solid black; 

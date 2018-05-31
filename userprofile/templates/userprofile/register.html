@@ -18,7 +18,7 @@
             <input name="{{ form.first_name.name }}" class="register_input" placeholder="First Name"><br>
             <input name="{{ form.last_name.name }}" class="register_input" placeholder="Last Name"><br>
             <button id="register">Register</button>
-            <a id="register" href="/">Login</a>
+            <a id="register" href="{% url 'login:login' %}">Login</a>
             </form>
         </div>
     </div>
