@@ -3,10 +3,10 @@ from .models import Workout
 
 class WorkoutSerializer(serializers.ModelSerializer):
     detail_url = serializers.CharField(read_only=True)
-    workout_type = serializers.SerializerMethodField()
 
     class Meta:
         model = Workout
         fields = '__all__'
 
-    workout_type = serializers.CharField(source = 'get_workout_type_display')
+    workout_type = serializers.ChoiceField(choices=Workout.workoutType)
+    workouttype = serializers.CharField(source='get_workout_type_display', required=False)

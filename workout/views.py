@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from userprofile.forms import UserProfileForm
 from userprofile.serializers import UserProfileSerializer
-from rest_framework.renderers import TemplateHTMLRenderer
 
 class WorkoutView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout.html'
@@ -62,6 +61,7 @@ class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
         form = self.form_class(request.POST, request.FILES)
         profile = request.user.userprofile
         serializer = UserProfileSerializer(profile, request.POST)
+        print (serializer.is_valid(), form.is_valid())
         if serializer.is_valid():
             serializer.save()
         if form.is_valid():
@@ -75,16 +75,6 @@ class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
     pattern_name = 'workoutdetails'
 
     def get(self, request, *args, **kwargs):
-        work = Workout.objects.get(pk=kwargs['pk'])
-        profile = request.user.userprofile
-        serializer = UserProfileSerializer(profile)
-        return render(request, self.template_name,{'workout':work,'serializer': serializer})
-
-    def post(self, request, *args, **kwargs):
-        profile = request.user.userprofile
-        serializer = UserProfileSerializer(profile, request.POST)
-        if serializer.is_valid():
-            serializer.save()
-        return render(request, self.template_name, {'serializer': serializer})
+        return HttpResponseRedirect(reverse('user:workout'))
 
 # Create your views here.

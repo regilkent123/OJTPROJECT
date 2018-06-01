@@ -20,4 +20,6 @@ class UserSerializer(serializers.ModelSerializer):
     detail_url = serializers.CharField(read_only=True)
     class Meta:
         model = User
-        fields = ['username','first_name','last_name','detail_url','email']
+        fields = ['id', 'username','first_name','last_name','detail_url','email', 'fullname']
+
+    fullname = serializers.CharField(source='get_full_name', required=False)
