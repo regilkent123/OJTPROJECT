@@ -67,11 +67,8 @@
 {% block js %}
 <script>
 var modal = document.getElementById('myModal');
-
 var btn = document.getElementById("user");
-
 var span = document.getElementsByClassName("close")[0];
-
 var content = document.getElementById("layout");
 
 var genderform = document.getElementById("gender-form");
@@ -100,6 +97,7 @@ var displayweight = document.getElementById("weight-display");
 
 var saveform = document.getElementById("save-userprofile");
 
+
 btn.onclick = function() {
     modal.style.display = "block";
     content.style.display = "none";
@@ -109,8 +107,6 @@ span.onclick = function() {
     modal.style.display = "none";
     content.style.display = "block";
 }
-
-
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";

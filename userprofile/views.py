@@ -32,8 +32,6 @@ class RegisterView(TemplateView):
                 form = RegistrationForm()
         return render(request, self.template_name, {'form': form})
 
-
-
 class LoginView(TemplateView):
     template_name = 'userprofile/login.html'
 
@@ -51,13 +49,12 @@ class LoginView(TemplateView):
             return HttpResponse('error')
         return HttpResponse('not allowed')
 
+
 class AfterLoginView(TemplateView):
     template_name = 'userprofile/loggedin.html'
+
 
 class LogOutView(TemplateView):
     def get(self,request):
         logout(request)
         return HttpResponseRedirect(reverse('login:login'))
-
-
-# Create your views here.

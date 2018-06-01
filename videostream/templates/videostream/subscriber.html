@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "workout/stylesheets/asd.css" %}" />
+<script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
+    <script type="text/javascript">
+        var apiKey = '{{api_key}}';
+        var sessionId = '{{session_id}}';
+        var token = '{{token}}';
+    </script>
+    <body>
+<div class="navbar">
+    <ul>
+        <li><a href="{% url 'user:home' %}">Home</a></li>
+        <li><a class="active" href="{% url 'user:workout' %}">Workout</a></li>
+        <li><a class="user"><img src="{% static "workout/images/user.png" %}" id="user"></a></li>
+        <li style="float:right"><a href="">Logout</a></li>
+    </ul>
+</div>
+<div class = "content">
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p><h1>PROFILE PAGE</h1></p>
+            <img src="{% static "workout/images/pewds.jpg" %}" id="user">
+            <p><h2>{{ user.first_name }} {{user.last_name }}</h2></p>
+            <p><h2>{{ user.email }}</h2></p>
+            <p><h2> <label>Gender:</label> {{ user.userprofile.gender }} <i class="fa fa-edit"></i></h2></p>
+            <p><h2> <label>User Type:</label> {{ user.userprofile.usertype }} <i class="fa fa-edit"></i></h2></p>
+            <p><h2> <label>Birthday:</label> {{ user.userprofile.birthday }} <i class="fa fa-edit"></i></h2></p>
+            <p><h2> <label>Address:</label> {{ user.userprofile.address }} <i class="fa fa-edit"></i></h2></p>
+            <p><h2> <label>Height:</label> {{ user.userprofile.height }} <i class="fa fa-edit"></i></h2></p>
+            <p><h2> <label>Weight:</label> {{ user.userprofile.weight }} <i class="fa fa-edit"></i></h2></p>
+        </div>
+    </div>
+    <div id="layout" class = "layout">
+
+            <div id="layout" class = "layout">
+            <div class="topnav">
+             <h1 id = "test"></h1>
+        <h2></h2>
+            </div>
+            
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="{% static 'videostream/subscribeVideo.js' %}"></script>
+{% endblock %}
+
+
+{% block js %}
+<script>
+
+var modal = document.getElementById('myModal');
+
+var btn = document.getElementById("user");
+
+var span = document.getElementsByClassName("close")[0];
+
+var content = document.getElementById("layout");
+
+ 
+btn.onclick = function() {
+    modal.style.display = "block";
+    content.style.display = "none";
+}
+
+
+span.onclick = function() {
+    modal.style.display = "none";
+    content.style.display = "block";
+}
+
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        content.style.display = "block";
+    }
+}
+</script>
+{% endblock %}

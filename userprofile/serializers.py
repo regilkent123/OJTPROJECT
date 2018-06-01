@@ -9,6 +9,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = '__all__'
 
+
     user_type = serializers.CharField(source='get_usertype_display', required=False)
     usertype = serializers.ChoiceField(choices=UserProfile.utype)
     sex = serializers.CharField(source='get_gender_display', required=False)

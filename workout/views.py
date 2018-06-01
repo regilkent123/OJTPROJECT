@@ -87,4 +87,3 @@ class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
             serializer.save()
         return render(request, self.template_name, {'serializer': serializer})
 
-# Create your views here.

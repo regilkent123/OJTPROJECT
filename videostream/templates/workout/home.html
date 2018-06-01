@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "workout/styles.css" %}" />
+<div class="navbar">
+	<ul>
+		<li><a class="active" href="{% url 'user:home' %}">Home</a></li>
+		<li><a href="{% url 'user:workout' %}">Workout</a></li>
+		<li style="float:right"><a href="">Logout</a></li>
+	</ul>
+</div>
+<div class = "content">
+	<div class = "layout">
+		
+	</div>
+</div>
+{% endblock %}
