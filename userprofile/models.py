@@ -28,11 +28,10 @@ class UserProfile(models.Model):
     height = models.PositiveIntegerField(validators=[MinValueValidator(1)], blank=True, null=True)
     weight = models.PositiveIntegerField(validators=[MinValueValidator(1)], blank=True, null=True)
     def __str__(self):
+
         return self.user.username
 
     def is_legal_age(self):
         now = date.today()
         age = now - self.birthdate
-        return (age.days/365) >= 18
-
-# Create your models here.
+        return (age.days/365) >= 18 

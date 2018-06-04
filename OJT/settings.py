@@ -32,6 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'workout.apps.WorkoutConfig',
+    # 'livestream.apps.LivestreamConfig',
+    'videostream.apps.VideostreamConfig',
+    # 'video.apps.VideoConfig',
     'userprofile.apps.UserprofileConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
 ]
+# AUTH_USER_MODEL= 'OJT.UserProfile'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,6 +133,12 @@ STATICFILES_DIRS =(
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+
+OPENTOK_API_KEY = os.getenv("OPENTOK_API_KEY")
+OPENTOK_SECRET_KEY = os.getenv("OPENTOK_SECRET_KEY")
 
 
 LOGIN_URL = 'login:login'

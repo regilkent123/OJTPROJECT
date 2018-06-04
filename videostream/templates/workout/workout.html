@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "workout/styles.css" %}" />
+<div class="navbar">
+    <ul>
+        <li><a href="{% url 'user:home' %}">Home</a></li>
+        <li><a class="active" href="{% url 'user:workout' %}">Workout</a></li>
+        <li style="float:right"><a href="">Logout</a></li>
+    </ul>
+</div>
+<div class = "content">
+    <div class = "layout">
+        <div class="header">
+            <form action="{% url 'user:createworkout' %}">
+            <button id="createworkout" style="float:right">CREATE WORKOUT</button>
+            </form>
+        </div>
+        <div class="content-layout">
+            <div class="workout" v-for="workout in workouts">
+                <p><a href="">[[workout.workout_name]]</a></p>
+                <p>[[workout.workout_type]]</p>
+                <p>[[workout.description]]</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '.content-layout',
+            delimiters: ["[[","]]"],
+            data: function(){
+                return{
+                    workouts:[],
+                    currentworkout:{}
+                }
+            },
+            mounted: function(){
+                this.getWorkouts();
+            },
+            methods: {
+                getWorkouts: function(e){
+                    var resource = this.$resource('/api/workout/');
+                    resource.get()
+                        .then((response)=> {
+                            this.workouts = response.data;
+                        }).catch((error) => {
+
+                        });
+                }
+            }
+        })
+    </script>
+{% endblock %}
