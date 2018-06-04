@@ -80,10 +80,8 @@ class startArchiveView(ForFitView):
             name='Videos',
             output_mode=OutputModes.individual
         )
-        print("start", vars(archive))
         archives = Archive.objects.create(archive_id=archive.id)
         self.archive_id=archive.id  
-        print("archive id" , archives)
         return HttpResponse('Start recording')
 
 class endArchiveView(ForFitView):
