@@ -72,11 +72,9 @@ class HomeView(LoginRequiredMixin,generic.TemplateView):
 
 
 class startArchiveView(ForFitView):
-    
-    session_id=Session.objects.first()
-    print(session_id)
 
     def get(self, request, *args, **kwargs):
+        session_id=Session.objects.first()
         print("Start archive")
         archive = opentok.start_archive(
             self.session_id,

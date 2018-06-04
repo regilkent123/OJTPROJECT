@@ -5,8 +5,8 @@
 <div class = "content_createworkout">
     <div class="navbar">
         <ul>
-            <li><a href="{% url 'user:home' %}">Home</a></li>
-            <li><a class="active" href="{% url 'user:workout' %}">Workout</a></li>
+            <li><a href="{% url 'workout:home' %}">Home</a></li>
+            <li><a class="active" href="{% url 'workout:workout' %}">Workout</a></li>
             <li><a class="user"><img v-on:click="user" src="{% static "workout/images/user.png" %}" id="user"></a></li>
             <li style="float:right"><a href="{% url 'login:logout' %}">Logout</a></li>
         </ul>
@@ -70,7 +70,6 @@
               reader.readAsDataURL(file);
             },
             submitWorkout: function(e){
-                getCookie;
                 let form = new FormData(e.target)
                 this.$http.post('/api/workout/', form, {headers: {'X-CSRFToken': getCookie("csrftoken"), 
                     'Content-Type': 'multipart/form-data'}})

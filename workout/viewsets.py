@@ -9,7 +9,6 @@ class WorkoutViewset(viewsets.ModelViewSet):
     serializer_class = WorkoutSerializer
 
     def create(self, request):
-        print(request.data)
         serializer = WorkoutSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

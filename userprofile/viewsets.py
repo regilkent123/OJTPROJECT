@@ -24,6 +24,6 @@ class UserViewset(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     def retrieve(self, request, pk):
-        profile = request.user
-        serializer = UserSerializer(profile)
+        user = request.user
+        serializer = UserSerializer(user)
         return Response(serializer.data)

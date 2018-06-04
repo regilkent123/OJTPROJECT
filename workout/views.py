@@ -16,7 +16,6 @@ class WorkoutView(LoginRequiredMixin,generic.TemplateView):
 
     def get_context_data(self):
         context = super().get_context_data()
-        context['current_user'] = self.request.user
         context['current_profile'] = self.request.user.userprofile
         return context
 
@@ -27,7 +26,6 @@ class HomeView(LoginRequiredMixin,generic.TemplateView):
 
     def get_context_data(self):
         context = super().get_context_data()
-        context['current_user'] = self.request.user
         context['current_profile'] = self.request.user.userprofile
         return context
         
@@ -46,7 +44,6 @@ class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
     def get_context_data(self, pk):
         context = super().get_context_data()
         context['workout_id'] = pk
-        context['current_user'] = self.request.user
         context['current_profile'] = self.request.user.userprofile
         return context
 # Create your views here.
