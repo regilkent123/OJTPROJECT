@@ -3,59 +3,52 @@
 {% load static %}
 {% load rest_framework %}
 <link rel="stylesheet" type="text/css" href="{% static "workout/stylesheets/asd.css" %}" />
-<div class="navbar">
-    <ul>
-        <li><a href="{% url 'user:home' %}">Home</a></li>
-        <li><a class="active" href="{% url 'user:workout' %}">Workout</a></li>
-        <li><a class="user"><img src="{% static "workout/images/user.png" %}" id="user"></a></li>
-        <li style="float:right"><a href="{% url 'login:logout' %}">Logout</a></li>
-    </ul>
-</div>
 <div class = "content">
-    <div id="myModal" class="modal">
+    <div class="navbar">
+        <ul>
+            <li><a href="{% url 'workout:home' %}">Home</a></li>
+            <li><a class="active" href="{% url 'workout:workout' %}">Workout</a></li>
+            <li><a class="user"><img v-on:click="user" src="{% static "workout/images/user.png" %}" id="user"></a></li>
+            <li style="float:right"><a href="{% url 'login:logout' %}">Logout</a></li>
+        </ul>
+    </div>
+    <div id="myModal" class="modal" v-bind:style="{display: modals}">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" v-on:click="close">&times;</span>
             <p><h1>PROFILE PAGE</h1></p>
             <img src="{% static "workout/images/pewds.jpg" %}" id="user">
-            <p><h2>{{ user.first_name }} {{user.last_name }}</h2></p>
-            <p><h2>{{ user.email }}</h2></p>
-            <form method="post" action="{% url 'user:workout' %}">
-                {% csrf_token %}
-            <select name="{{serializer.user.name}}" id="" class="userprofile-forms">
-                <option value="{{ user.userprofile.user.pk }}"></option>
-            </select>
-            <p><h2 id="gender-display"> <label >Gender:</label> {{ user.userprofile.get_gender_display }} <i id="icon-gender" class="fa fa-edit"></i></h2></p>
-            <select name="{{serializer.gender.name}}" id="gender-form" class="userprofile-forms">
-                <option value="{{ user.userprofile.gender }}">Gender</option>
-            {% for value, label in serializer.gender.choices.items %}
-                <option value="{{value}}">{{label}}</option>
-            {% endfor %}
-            </select>
-            <p><h2 id="usertype-display"> <label>User Type:</label> {{ user.userprofile.get_usertype_display }} <i id="icon-usertype" class="fa fa-edit"></i></h2></p>
-            <select name="{{ serializer.usertype.name }}" id="usertype-form" class="userprofile-forms">
-                <option value="{{ serializer.usertype.value }}">User Type</option>
-            {% for value, label in serializer.usertype.choices.items %}
-                <option value="{{value}}">{{label}}</option>
-            {% endfor %}
-            </select>
-            <p><h2 id="birthday-display"> <label>Birthday:</label> {{ user.userprofile.birthdate }} <i id="icon-birthday" class="fa fa-edit"></i></h2></p>
-            <input type="date" name="{{ serializer.birthdate.name }}" id="birthday-form" class="userprofile-forms" value="{{serializer.birthdate.value}}">
-            <p><h2  id="address-display"> <label>Address:</label> {{ user.userprofile.address }} <i id="icon-address" class="fa fa-edit"></i></h2></p>
-            <textarea name="{{ serializer.address.name }}" id="address-form" class="userprofile-forms" value="{{ user.userprofile.address }}">{{ user.userprofile.address }}</textarea>
-            <p><h2  id="height-display"> <label>Height:</label> {{ user.userprofile.height }} <i id="icon-height" class="fa fa-edit"></i></h2></p>
-            <input type="number" name="{{ serializer.height.name }}" id="height-form" class="userprofile-forms" value="{{ user.userprofile.height }}">
-            <p><h2  id="weight-display"> <label>Weight:</label> {{ user.userprofile.weight }} <i id="icon-weight" class="fa fa-edit"></i></h2></p>
-            <input type="number" name="{{ serializer.weight.name }}" id="weight-form" class="userprofile-forms" value="{{ user.userprofile.weight }}">
-            <button class="save-userprofile" id="save-userprofile" onclick="getData(); return false;">save</button>
+            <p><h2>[[ currentuser.fullname ]]</h2></p>
+            <p><h2>[[ currentuser.email ]]</h2></p>
+            <form method="post" v-on:submit.prevent="updateProfile($event)">
+                <h2 id="gender-display" v-bind:style="{display: hidelabel}"> <label >Gender:</label> [[ currentuser.gender ]] </h2>
+                <p><select v-model="currentprofile.gender" name="gender" class="userprofile-forms" v-bind:style="{display: showform}">
+                    <option value="" disabled selected>Gender</option>
+                    <option v-for="gender in genders" v-bind:value="gender[0]">[[ gender ]]</option>
+                </select></p>
+                <h2 id="usertype-display" v-bind:style="{display: hidelabel}"> <label>User Type:</label> [[ currentuser.usertype ]] </h2>
+                <p><select v-model="currentprofile.usertype" name="usertype" class="userprofile-forms" v-bind:style="{display: showform}">
+                    <option value="" disabled selected>User Type</option>
+                    <option v-for="(usertype,i) in usertypes" v-bind:value="i+1">[[ usertype ]]</option>
+                </select></p>
+                <h2 id="birthday-display" v-bind:style="{display: hidelabel}"> <label>Birthday:</label> [[ currentuser.birthdate ]] </h2>
+                <p><input v-model="currentprofile.birthdate" type="date" name="birthdate" class="userprofile-forms" placeholder="birthdate" v-bind:style="{display: showform}"></p>
+                <h2  id="address-display" v-bind:style="{display: hidelabel}"> <label>Address:</label> [[ currentuser.address ]] </h2>
+                <p><textarea v-model="currentprofile.address" name="address" class="userprofile-forms" placeholder="address" v-bind:style="{display: showform}"></textarea></p>
+                <h2  id="height-display" v-bind:style="{display: hidelabel}"> <label>Height:</label> [[ currentuser.height ]]</h2>
+                <p><input v-model="currentprofile.height" type="number" name="height" class="userprofile-forms" placeholder="height" v-bind:style="{display: showform}"></p>
+                <h2  id="weight-display" v-bind:style="{display: hidelabel}"> <label>Weight:</label> [[ currentuser.weight ]]</h2>
+                <p><input v-model="currentprofile.weight" type="number" name="weight" class="userprofile-forms" placeholder="weight" v-bind:style="{display: showform}"></p>
+                <p><button class="userprofile" v-on:click="showLabels" v-bind:style="{display: showform}">Save</button></p>
+                <p><button class="userprofile" v-on:click="showForms" v-bind:style="{display: hidelabel}">Edit</button></p>
             </form>
         </div>
     </div>
     <div id="layout" class = "layout">
         <div class="info-header">
             <div class="info">
-                <h1>Workout Name: <span>{{ workout.workout_name }}</span></h1>
-                <h1>Workout Type: <span> {{ workout.get_workout_type_display }} </span></h1>
-                <h1>Description: <span>{{ workout.description }}</span></h1>
+                <h1>Workout Name: <span>[[ currentworkout.workout_name ]]</span></h1>
+                <h1>Workout Type: <span> [[ currentworkout.workouttype ]] </span></h1>
+                <h1>Description: <span>[[ currentworkout.description ]]</span></h1>
             </div>
         </div>
 
@@ -65,100 +58,118 @@
 {% endblock %}
 
 {% block js %}
-<script>
-var modal = document.getElementById('myModal');
-var btn = document.getElementById("user");
-var span = document.getElementsByClassName("close")[0];
-var content = document.getElementById("layout");
-
-var genderform = document.getElementById("gender-form");
-var editgender = document.getElementById("icon-gender");
-var displaygender = document.getElementById("gender-display");
-
-var usertypeform = document.getElementById("usertype-form");
-var editusertype = document.getElementById("icon-usertype");
-var displayusertype = document.getElementById("usertype-display");
-
-var birthdayform = document.getElementById("birthday-form");
-var editbirthday = document.getElementById("icon-birthday");
-var displaybirthday = document.getElementById("birthday-display");
-
-var addressform = document.getElementById("address-form");
-var editaddress = document.getElementById("icon-address");
-var displayaddress = document.getElementById("address-display");
-
-var heightform = document.getElementById("height-form");
-var editheight = document.getElementById("icon-height");
-var displayheight = document.getElementById("height-display");
-
-var weightform = document.getElementById("weight-form");
-var editweight = document.getElementById("icon-weight");
-var displayweight = document.getElementById("weight-display");
-
-var saveform = document.getElementById("save-userprofile");
-
-
-btn.onclick = function() {
-    modal.style.display = "block";
-    content.style.display = "none";
-}
-
-span.onclick = function() {
-    modal.style.display = "none";
-    content.style.display = "block";
-}
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-        content.style.display = "block";
+<script type="text/javascript">
+        function getCookie(name) {
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
     }
-}
-
-editgender.onclick = function(){
-     genderform.style.display = "block";
-     saveform.style.display = "inline-block";
-     displaygender.style.display = "none";
-}
-
-
-editusertype.onclick = function(){
-     usertypeform.style.display = "block";
-     saveform.style.display = "inline-block";
-     displayusertype.style.display = "none";
-}
-
-
-editbirthday.onclick = function(){
-     birthdayform.style.display = "block";
-     saveform.style.display = "inline-block";
-     displaybirthday.style.display = "none";
-}
-
-
-editaddress.onclick = function(){
-     addressform.style.display = "block";
-     saveform.style.display = "inline-block";
-     displayaddress.style.display = "none";
-}
-
-
-editheight.onclick = function(){
-     heightform.style.display = "block";
-     saveform.style.display = "inline-block";
-     displayheight.style.display = "none";
-}
-
-
-editweight.onclick = function(){
-     weightform.style.display = "block";
-     saveform.style.display = "inline-block";
-     displayweight.style.display = "none";
-}
-
-saveform.onclick = function(){
-    addressform.style.display = "none";
-    saveform.style.display = "none";
-    displayaddress.style.display = "block";
-}
+    var userId = {{user.id}};
+    var workoutid = {{ workout_id }};
+        var layout = new Vue({
+            el: '.content',
+            delimiters: ["[[","]]"],
+            data: function(){
+                return{
+                    workouts:[],
+                    currentworkout:{},
+                    currentprofile:{},
+                    prof: {},
+                    currentuser:{},
+                    genders: ['Male','Female'],
+                    usertypes: ['Trainee','Trainer'],
+                    showform: 'none',
+                    hidelabel: 'block',
+                    modals: 'none',
+                }
+            },
+            watch: {
+                currentprofile:{
+                    handler(newValue, oldValue) {
+                        if (this.currentprofile.usertype == 1) {
+                            this.currentprofile.user_type = 'Trainee'
+                        } else {
+                            this.currentprofile.user_type = 'Trainer'
+                        }
+                        if(this.currentprofile.gender == 'M'){
+                            this.currentprofile.sex = 'Male'
+                        } else{
+                            this.currentprofile.sex = 'Female'
+                        }
+                    },
+                    deep: true
+                } ,
+            },
+            mounted: function(){
+                this.getWorkouts();
+                this.getCurrentWorkout(workoutid);
+                this.getCurrentProfile(userId);
+                this.getCurrentUser(userId);
+            },
+            methods: {
+                getCurrentWorkout: function(id){
+                    var resource = this.$resource('/api/workout{/id}');
+                    resource.get({id:id})
+                        .then((response) => {
+                            this.currentworkout = response.data;
+                        }).catch((error) => {
+                            console.log('ERROR')
+                        });
+                },
+                getWorkouts: function(e){
+                    var resource = this.$resource('/api/workout/');
+                    resource.get()
+                        .then((response)=> {
+                            this.workouts = response.data;
+                        }).catch((error) => {
+                            console.log('ERROR')
+                        });
+                },
+                user: function(){
+                    this.modals = 'block'
+                },
+                close: function(){
+                    this.modals = 'none'
+                },
+                showForms: function(){
+                    this.showform = 'block'
+                    this.hidelabel = 'none'
+                    this.getCurrentProfile(userId)
+                    return
+                },
+                showLabels: function(){
+                    this.showform = 'none'
+                    this.hidelabel = 'block'
+                },
+                updateProfile: function(id){
+                    getCookie;
+                    this.$http.put('/api/userprofile{/id}/update/', this.currentprofile, {headers: {'X-CSRFToken': getCookie("csrftoken")}})
+                    .then((response) => {
+                        this.currentprofile = {};
+                    }).catch((error) => {
+                            console.log('ERROR')
+                        });
+                },
+                getCurrentProfile: function(user) {
+                    var resource = this.$resource('/api/userprofile{/user}');
+                    resource.get({user: user})
+                        .then((response) => {
+                            this.currentprofile = response.data;
+                            this.prof = response.data;
+                        }).catch((error) => {
+                            console.log('ERROR')
+                        });
+                },
+                getCurrentUser: function(id){
+                var resource = this.$resource('/api/user{/id}');
+                resource.get({id: id})
+                    .then((response) => {
+                        this.currentuser = response.data;
+                    }).catch((error) => {
+                        console.log('ERROR')
+                    });
+            },
+            }
+        })
 </script>
 {% endblock %}

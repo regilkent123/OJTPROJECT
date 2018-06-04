@@ -70,12 +70,7 @@ class HomeView(LoginRequiredMixin,generic.TemplateView):
             form.save()
         return render(request, self.template_name, {'form': form})
 
-
 class startArchiveView(ForFitView):
-    
-    session_id=Session.objects.first()
-    print(session_id)
-
     def get(self, request, *args, **kwargs):
         print("Start archive")
         archive = opentok.start_archive(
@@ -85,9 +80,8 @@ class startArchiveView(ForFitView):
             name='Videos',
             output_mode=OutputModes.individual
         )
-
-        archives = Archive(archive_id=archive.id)
-        archives.save()        
+        archives = Archive.objects.create(archive_id=archive.id)
+        self.archive_id=archive.id  
         return HttpResponse('Start recording')
 
 class endArchiveView(ForFitView):
