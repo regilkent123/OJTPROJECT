@@ -14,3 +14,11 @@ class WorkoutViewset(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
         return Response()
+
+    def get_object(self, pk):
+        return Workout.objects.get(pk=pk)
+
+    def retrieve(self, request, pk):
+        work = self.get_object(pk)
+        serializer = WorkoutSerializer(work)
+        return Response(serializer.data)

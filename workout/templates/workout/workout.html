@@ -17,8 +17,8 @@
             <span class="close" v-on:click="close">&times;</span>
             <p><h1>PROFILE PAGE</h1></p>
             <img src="{% static "workout/images/pewds.jpg" %}" id="user">
-            <p><h2>{{ user.first_name }} {{ user.last_name }}</h2></p>
-            <p><h2>{{ user.email }}</h2></p>
+            <p><h2>[[ currentuser.fullname ]]</h2></p>
+            <p><h2>[[ currentuser.email ]]</h2></p>
             <form method="post" v-on:submit.prevent="updateProfile($event)">
                 <h2 id="gender-display" v-bind:style="{display: hidelabel}"> <label >Gender:</label> [[ prof.sex ]] </h2>
                 <p><select v-model="currentprofile.gender" name="gender" class="userprofile-forms" v-bind:style="{display: showform}">
@@ -68,6 +68,8 @@
         var parts = value.split("; " + name + "=");
         if (parts.length == 2) return parts.pop().split(";").shift();
     }
+    var userId = {{current_user.id}};
+    var profileId = {{ current_profile.user.id }};
         var layout = new Vue({
             el: '.content',
             delimiters: ["[[","]]"],
@@ -104,8 +106,8 @@
             },
             mounted: function(){
                 this.getWorkouts();
-                this.getCurrentUser(1);
-                this.getCurrentProfile(1);
+                this.getCurrentProfile(profileId);
+                this.getCurrentUser(userId);
             },
             methods: {
                 getWorkouts: function(e){
@@ -152,6 +154,15 @@
                             console.log('ERROR')
                         });
                 },
+                getCurrentUser: function(id){
+                var resource = this.$resource('/api/user{/id}');
+                resource.get({id: id})
+                    .then((response) => {
+                        this.currentuser = response.data;
+                    }).catch((error) => {
+                        console.log('ERROR')
+                    });
+            },
             }
         })
     </script>

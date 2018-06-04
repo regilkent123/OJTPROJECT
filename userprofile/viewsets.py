@@ -22,3 +22,8 @@ class UserProfileViewset(viewsets.ModelViewSet):
 class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def retrieve(self, request, pk):
+        profile = request.user
+        serializer = UserSerializer(profile)
+        return Response(serializer.data)
