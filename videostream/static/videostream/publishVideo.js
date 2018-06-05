@@ -1,9 +1,16 @@
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
 console.log('Session ID: ' + sessionId);
 console.log('Token: ' + token);
 
 
 var session, publisher;
 var HAS_PUBLISH = false;
+var archive_id = null;
 
 if (OT.checkSystemRequirements() == 1) {
   session = OT.initSession(apiKey, sessionId);
@@ -60,12 +67,17 @@ function StartPublish(start_button){
           console.log(sessionId)
           HAS_PUBLISH = true;
           xhr = new XMLHttpRequest();
-          xhr.onreadystatechange = function() {
+          xhr.onreadystatechange = function(e) {
             if(this.readyState == 4 && this.status == 200){
+              
+              var response = JSON.parse(this.responseText)
+              archive_id = response.archive_id
+              // debugger
               alert(this.responseText);
+
             }
           }
-
+          console.log("Asd")
           xhr.open("GET", "/video/startArchive/", true);
           xhr.send();
         }
@@ -85,14 +97,16 @@ function StopPublish(stop_button){
       publisher = OT.initPublisher('publisher', {insertMode: 'append'});
 
       xhr = new XMLHttpRequest();
+
       xhr.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200){
           alert(this.responseText);
         }
       }
 
-      xhr.open("GET", "/video/endArchive/", true);
-      xhr.send();
+      xhr.open("GET", "/video/endArchive/?archive_id=" + archive_id, true);
+      xhr.setRequestHeader('X-CSRFToken', getCookie("csrftoken"))
+      xhr.send("archive_id=" + archive_id);
     }
     else {
       alert("No streaming occured");

@@ -26,7 +26,8 @@ class WorkoutView(LoginRequiredMixin,generic.TemplateView):
         print (serializer.is_valid(), serializer.errors)
         if serializer.is_valid():
             serializer.save()
-        return render(request, self.template_name, {'serializer': serializer})
+        # return render(request, self.template_name, {'serializer': serializer})
+        return HttpResponseRedirect('/video/publish/')
 
 class HomeView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/home.html'
