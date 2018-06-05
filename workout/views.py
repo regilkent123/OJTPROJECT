@@ -9,43 +9,30 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from userprofile.forms import UserProfileForm
 from userprofile.serializers import UserProfileSerializer
-from rest_framework.renderers import TemplateHTMLRenderer
+from opentok import OpenTok, MediaModes, Roles, OutputModes, ArchiveModes
+from django.conf import settings
+from videostream.views import ForFitView
+
+opentok = OpenTok(settings.OPENTOK_API_KEY, settings.OPENTOK_SECRET_KEY)
 
 class WorkoutView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout.html'
     redirect_field_name = ''
 
-    def get(self, request, *args, **kwargs):
-        profile = request.user.userprofile
-        serializer = UserProfileSerializer(profile)
-        return render(request, self.template_name, {'serializer': serializer})
-
-    def post(self, request, *args, **kwargs):
-        profile = request.user.userprofile
-        serializer = UserProfileSerializer(profile, request.POST)
-        print (serializer.is_valid(), serializer.errors)
-        if serializer.is_valid():
-            serializer.save()
-        # return render(request, self.template_name, {'serializer': serializer})
-        return HttpResponseRedirect('/video/publish/')
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['current_profile'] = self.request.user.userprofile
+        return context
 
 class HomeView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/home.html'
     redirect_field_name = ''
     form_class = UserProfileForm
 
-    def get(self, request, *args, **kwargs):
-        profile = request.user.userprofile
-        serializer = UserProfileSerializer(profile)
-        return render(request, self.template_name, {'serializer': serializer})
-
-    def post(self, request, *args, **kwargs):
-        profile = request.user.userprofile
-        serializer = UserProfileSerializer(profile, request.POST)
-        if serializer.is_valid():
-            serializer.save()
-        return render(request, self.template_name, {'serializer': serializer})
-        
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['current_profile'] = self.request.user.userprofile
+        return context
 
 class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/createworkout.html'
@@ -53,38 +40,18 @@ class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
     form_class = WorkoutForm
     redirect_field_name = ''
 
-    def get(self, request, *args, **kwargs):
-        profile = request.user.userprofile
-        serializer = UserProfileSerializer(profile)
-        form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {'form': form,'serializer': serializer})
-
-    def post(self, request, *args, **kwargs) :
-        form = self.form_class(request.POST, request.FILES)
-        profile = request.user.userprofile
-        serializer = UserProfileSerializer(profile, request.POST)
-        if serializer.is_valid():
-            serializer.save()
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/home/workout/')
-        return render(request, self.template_name, {'form': form,'serializer': serializer})
-
-class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
+class WorkoutDetailsView(ForFitView,LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout_details.html'
     redirect_field_name = ''
     pattern_name = 'workoutdetails'
 
-    def get(self, request, *args, **kwargs):
-        work = Workout.objects.get(pk=kwargs['pk'])
-        profile = request.user.userprofile
-        serializer = UserProfileSerializer(profile)
-        return render(request, self.template_name,{'workout':work,'serializer': serializer})
-
-    def post(self, request, *args, **kwargs):
-        profile = request.user.userprofile
-        serializer = UserProfileSerializer(profile, request.POST)
-        if serializer.is_valid():
-            serializer.save()
-        return render(request, self.template_name, {'serializer': serializer})
-
+    def get_context_data(self, pk):
+        token = opentok.generate_token(self.session_id)
+        context = super().get_context_data()
+        context['workout_id'] = pk
+        context['current_profile'] = self.request.user.userprofile
+        context['api_key'] = settings.OPENTOK_API_KEY
+        context['session_id'] = self.session_id
+        context['token'] = token
+        return context
+# Create your views here.

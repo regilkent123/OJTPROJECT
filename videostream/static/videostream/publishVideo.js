@@ -22,7 +22,9 @@ if (OT.checkSystemRequirements() == 1) {
     else {
       console.log("Connected to the session.");
 
-      publisher = OT.initPublisher('publisher', {insertMode: 'append', width:'50%', height:'50%'});
+      var publisherContainer = document.getElementById('file-contents');
+
+      publisher = OT.initPublisher(publisherContainer, {insertMode: "append", width:'500px', height:'500px'});
 
       start_button = document.getElementById("1");
       stop_button = document.getElementById("2");
@@ -94,7 +96,9 @@ function StopPublish(stop_button){
     if(HAS_PUBLISH) {
       session.unpublish(publisher);
       HAS_PUBLISH = false;
-      publisher = OT.initPublisher('publisher', {insertMode: 'append'});
+      var publisherContainer = document.getElementById('file-contents');
+
+      publisher = OT.initPublisher(publisherContainer, {insertMode: "append", width:'500px', height:'500px'});
 
       xhr = new XMLHttpRequest();
 

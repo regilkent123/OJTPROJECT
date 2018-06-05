@@ -28,7 +28,6 @@ class ForFitView(LoginRequiredMixin, View):
             self.session_id = sessions.session_id
         return super().dispatch(*args, **kwargs)
 
-
 class PublishVideoView(ForFitView):
 
     def get(self, request, *args, **kwargs):
@@ -39,7 +38,6 @@ class PublishVideoView(ForFitView):
             'token': token,
         }
         return render(request, 'videostream/publisher.html', content)
-
 
 class SubscribeVideoView(ForFitView):
 
@@ -52,9 +50,7 @@ class SubscribeVideoView(ForFitView):
         }
         return render(request, 'videostream/subscriber.html', content)
 
-
 class HomeView(LoginRequiredMixin,generic.TemplateView):
-
 
     template_name = 'workout/home.html'
     initial = {'key': 'value'}
@@ -85,11 +81,7 @@ class startArchiveView(ForFitView):
         print("start", vars(archive))
         archives = Archive.objects.create(archive_id=archive.id)
         archive_id=archive.id 
-
-        
-        print("archive_id" , archive_id)
         return JsonResponse({'archive_id':archive_id})
-  
 
 class endArchiveView(LoginRequiredMixin, View):
     def get(self , request , *args , **kwargs):
@@ -97,7 +89,6 @@ class endArchiveView(LoginRequiredMixin, View):
         archive_id = self.request.GET.get("archive_id")
         opentok.stop_archive(archive_id)
         return HttpResponse('Stop recording')
-
 
 class deleteArchive(ForFitView):
     def get(self , request , *args , **kwargs):

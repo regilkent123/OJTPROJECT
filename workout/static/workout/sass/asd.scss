@@ -10,12 +10,13 @@ div.navbar{
     position: relative;
     ul{
         position: relative;
+        right: 22%;
         list-style-type: none;
         margin: 0;
         padding: 0;
         overflow: hidden;
         background-color: #333; 
-        width: 100%;
+        width: 144%;
         bottom: 10px;
 
         li {
@@ -59,7 +60,6 @@ div.content {
     padding: 10px;
 
     .modal {
-        display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
         z-index: 1; /* Sit on top */
         padding-top: 100px; /* Location of the box */
@@ -90,12 +90,13 @@ div.content {
                 width: 0px;
             }
 
-            .save-userprofile{
-                display: none;
+            .userprofile{
+                position: relative;
+                left: 43%;
             }
 
             .userprofile-forms{
-                display: none;
+                display: block;
                 position: relative;
                 width: 30%;
                 left: 35%;
@@ -117,10 +118,13 @@ div.content {
                 }
             }
 
-            h1,h2,select,input, textarea{
+            h1,h2,select,input, textarea,a{
                 font-family: OCR A Std, monospace;
                 weight: 900;
                 color: black;
+            }
+            a:hover{
+                color: #7524cc;
             }
             select option{
                 color: black;
@@ -204,6 +208,54 @@ div.content {
                         font-size: 18px;
                     }
                 }
+            }
+        }
+
+        .nav-workout{
+            position: fixed;
+            top: 26.5%;
+            width: 100%;
+            height: 10%;
+            ul{
+                position: fixed;
+                width: 100%;
+                overflow: hidden;
+                background-color: #ffffff; 
+                list-style-type: none;
+                left: 13%;
+                li{
+                    float: left;
+                    & a{
+                        display: block;
+                        color: #a31d0b;
+                        text-align: center;
+                        padding: 5px 30px;
+                        text-decoration: none;
+                        font-size: 20px;
+                        &.active {
+                            background-color:#a31d0b;
+                            background-color: #a31d0b;
+                            color: #ffffff;
+                        }
+                    }
+                    & a:hover:not(.active) {
+                          background-color: black;
+                          color: #ffffff;
+                          cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .file-contents{
+            position: relative;
+            top: 26%;
+            overflow: scroll;
+            height: 76.8%;
+
+            &::-webkit-scrollbar {
+                display: none;
+                width: 0px;
             }
         }
 
@@ -292,82 +344,18 @@ button {
 div.content_createworkout {
     text-align: center;
     margin: auto;
-    width: 50%;
+    width: 70%;
     padding: 10px;
 
-    .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        padding-top: 100px; /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-
-        
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 40%;
-            height: 80%;
-            border-radius: 9px;
-            -webkit-animation-name: animatetop;
-            -webkit-animation-duration: 0.4s;
-            animation-name: animatetop;
-            animation-duration: 0.4s;
-
-            h1{
-                font-family: OCR A Std, monospace;
-                weight: 900;
-            }
-            img{
-                border: 3px solid black; 
-                border-radius: 100%;
-                width:40%;
-                height:40%;
-            }
-
-            @-webkit-keyframes animatetop {
-                from {top:-300px; opacity:0} 
-                to {top:0; opacity:1}
-            }
-
-            @keyframes animatetop {
-                from {top:-300px; opacity:0}
-                to {top:0; opacity:1}
-            }
-
-            .close {
-                color: #aaaaaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-
-                &:hover, &:focus{
-                    color: #000;
-                    text-decoration: none;
-                    cursor: pointer;
-                }
-            }
-
-        }
-    }
-
     div.layout_createworkout{
-        position: fixed;
+        position: relative;
+        left: 20%;
         background-color: rgba(0, 0, 0, 0.6);
         border: 1px solid black;
         filter: alpha(opacity=60);
-        width: 50%;
+        width: 60%;
         padding-bottom: 20px;
-        height: 80%;
+        height: 100%;
         bottom: 30%;
         border-radius: 12px;
         top:100px;

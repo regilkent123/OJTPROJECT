@@ -2,35 +2,93 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static "workout/stylesheets/asd.css" %}" />
-<div class="navbar">
-    <ul>
-        <li><a href="{% url 'user:home' %}">Home</a></li>
-        <li><a class="active" href="{% url 'user:workout' %}">Workout</a></li>
-        <li><a class="user"><img src="{% static "workout/images/user.png" %}" id="user"></a></li>
-        <li style="float:right"><a href="{% url 'login:logout' %}">Logout</a></li>
-    </ul>
-</div>
 <div class = "content_createworkout">
+    <div class="navbar">
+        <ul>
+            <li><a href="{% url 'workout:home' %}">Home</a></li>
+            <li><a class="active" href="{% url 'workout:workout' %}">Workout</a></li>
+            <li><a class="user"><img v-on:click="user" src="{% static "workout/images/user.png" %}" id="user"></a></li>
+            <li style="float:right"><a href="{% url 'login:logout' %}">Logout</a></li>
+        </ul>
+    </div>
     <div id="layout_createworkout" class = "layout_createworkout">
-    	<form method="post" action="{% url 'user:createworkout' %}"
-        enctype="multipart/form-data">
-    		{% csrf_token %}
-    		<h1>CREATE WORKOUT</h1>
-    		<input name="{{ form.workout_name.name }}" class="createworkout" placeholder="WORKOUT NAME"><br><br>
-    		<select name="{{ form.workout_type.name }}" class="createworkout" placeholder = "WORKOUT TYPE">
-    		<option value="">WORKOUT TYPE</option>
-    		{% for value, label in form.workout_type.field.choices %}
-    		<option value="{{value}}">{{ label }}</option>
-    		{% endfor %}
-    		</select><br><br>
-            <textarea name="{{ form.description.name }}" class="createworkout" placeholder="DESCRIPTION" WRAP="HARD"></textarea><br><br>
-            <input type="file" class="createworkout" name="{{ form.workout_photo.name }}"><br><br>
-    		<button>Create</button>
-    	</form>
+        <form v-on:submit.prevent="submitWorkout($event)" enctype="multipart/form-data">
+            <h1>CREATE WORKOUT</h1>
+            <input v-model="newWorkout.workout_name" name="workout_name" class="createworkout" placeholder="WORKOUT NAME" ><br><br>
+            <select v-model="newWorkout.workout_type" name="workout_type" class="createworkout" placeholder = "WORKOUT TYPE">
+            <option value="">WORKOUT TYPE</option>
+            <option v-for="(type,i) in utype" v-bind:value="i+1">[[type]]</option>
+            </select><br><br>
+            <textarea v-model="newWorkout.description" name="description" class="createworkout" placeholder="DESCRIPTION" WRAP="HARD"></textarea><br><br>
+            <input @change="photo" type="file" name="workout_photo" class="createworkout"><br><br>
+            <button>Create</button>
+        </form>
     </div>
 </div>
 {% endblock %}
 
 {% block js %}
-
+<script type="text/javascript">
+    function getCookie(name) {
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+    var app = new Vue({
+        el: '.layout_createworkout',
+        delimiters: ["[[","]]"],
+        data: function(){
+                return{
+                    workouts:[],
+                    newWorkout:{
+                        workout_name: '',
+                        workout_type: '',
+                        description: '',
+                        workout_photo: '',
+                    },
+                    currentworkout:{},
+                    utype: ['Aerobic exercise','Strength exercise','Balance exercise','Flexibility exercise'],
+                }
+            },
+        mounted: function(){
+            this.getWorkouts();
+        },
+        methods: {
+            photo: function(e){
+                var files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.createImage(files[0]);
+            },
+            createImage(file) {
+              var image = new Image();
+              var reader = new FileReader();
+        
+              reader.onload = (e) => {
+                this.newWorkout.workout_photo = e.target.result;
+              };
+              reader.readAsDataURL(file);
+            },
+            submitWorkout: function(e){
+                let form = new FormData(e.target)
+                this.$http.post('/api/workout/', form, {headers: {'X-CSRFToken': getCookie("csrftoken"), 
+                    'Content-Type': 'multipart/form-data'}})
+                    .then((response) => {
+                        this.getWorkouts();
+                    }).catch((error) => {
+                        console.log('ERROR')
+                    });
+            },
+            getWorkouts: function(e){
+                var resource = this.$resource('/api/workout/');
+                resource.get()
+                    .then((response)=> {
+                        this.workouts = response.data;
+                    }).catch((error) => {
+                        console.log('ERROR')
+                    });
+            },
+        }
+    })
+</script>
 {% endblock %}
