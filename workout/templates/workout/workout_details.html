@@ -16,7 +16,7 @@
         <div class="modal-content">
             <span class="close" v-on:click="close">&times;</span>
             <p><h1>PROFILE PAGE</h1></p>
-            <img src="{% static "workout/images/pewds.jpg" %}" id="user">
+            <img src="{% static "workout/images/User-01.png" %}" id="user">
             <p><h2>[[ currentuser.fullname ]]</h2></p>
             <p><h2>[[ currentuser.email ]]</h2></p>
             <form method="post" v-on:submit.prevent="updateProfile($event)">
@@ -39,7 +39,7 @@
                 <h2  id="weight-display" v-bind:style="{display: hidelabel}"> <label>Weight:</label> [[ currentuser.weight ]]</h2>
                 <p><input v-model="currentprofile.weight" type="number" name="weight" class="userprofile-forms" placeholder="weight" v-bind:style="{display: showform}"></p>
                 <p><button class="userprofile" v-on:click="showLabels" v-bind:style="{display: showform}">Save</button></p>
-                <p><button class="userprofile" v-on:click="showForms" v-bind:style="{display: hidelabel}">Edit</button></p>
+                <p><button type="button" class="userprofile" v-on:click="showForms" v-bind:style="{display: hidelabel}">Edit</button></p>
             </form>
         </div>
     </div>
@@ -51,13 +51,29 @@
                 <h1>Description: <span>[[ currentworkout.description ]]</span></h1>
             </div>
         </div>
-
-        <img src="">
+        <div class="nav-workout">
+            <ul>
+                <li><i><u><a v-bind:class="video" v-on:click="getVideos">Videos</a></u></i></li>
+                <li><i><u><a v-bind:class="audio" v-on:click="getAudio">Audio Coach</a></u></i></li>
+                <li><i><u><a v-bind:class="live" v-on:click="getLivestrean">Live Streams</a></u></i></li>
+            </ul>
+        </div>
+        <div class="file-contents" id="file-contents">
+            <button id="1">Start </button>
+            <button id="2">End </button>
+        </div>
     </div>
 </div>
 {% endblock %}
 
 {% block js %}
+<script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
+    <script type="text/javascript">
+        var apiKey = '{{api_key}}';
+        var sessionId = '{{session_id}}';
+        var token = '{{token}}';
+    </script>
+<script type="text/javascript" src="{% static 'videostream/publishVideo.js' %}"></script>
 <script type="text/javascript">
         function getCookie(name) {
         var value = "; " + document.cookie;
@@ -65,7 +81,7 @@
         if (parts.length == 2) return parts.pop().split(";").shift();
     }
     var userId = {{user.id}};
-    var workoutid = {{ workout_id }};
+    var workoutid = {{workout_id}};
         var layout = new Vue({
             el: '.content',
             delimiters: ["[[","]]"],
@@ -81,6 +97,9 @@
                     showform: 'none',
                     hidelabel: 'block',
                     modals: 'none',
+                    video: '',
+                    audio: '',
+                    live: '',
                 }
             },
             watch: {
@@ -107,6 +126,21 @@
                 this.getCurrentUser(userId);
             },
             methods: {
+                getVideos: function(){
+                    this.video = 'active';
+                    this.audio = '';
+                    this.live = '';
+                },
+                getAudio: function(){
+                    this.video = '';
+                    this.audio = 'active';
+                    this.live = '';
+                },
+                getLivestrean: function(){
+                    this.video = '';
+                    this.audio = '';
+                    this.live = 'active';
+                },
                 getCurrentWorkout: function(id){
                     var resource = this.$resource('/api/workout{/id}');
                     resource.get({id:id})
@@ -143,7 +177,7 @@
                 },
                 updateProfile: function(id){
                     getCookie;
-                    this.$http.put('/api/userprofile{/id}/update/', this.currentprofile, {headers: {'X-CSRFToken': getCookie("csrftoken")}})
+                    this.$http.put('/api/userprofile/update/', this.currentprofile, {headers: {'X-CSRFToken': getCookie("csrftoken")}})
                     .then((response) => {
                         this.currentprofile = {};
                     }).catch((error) => {

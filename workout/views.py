@@ -9,6 +9,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from userprofile.forms import UserProfileForm
 from userprofile.serializers import UserProfileSerializer
+from opentok import OpenTok, MediaModes, Roles, OutputModes, ArchiveModes
+from django.conf import settings
+from videostream.views import ForFitView
+
+opentok = OpenTok(settings.OPENTOK_API_KEY, settings.OPENTOK_SECRET_KEY)
 
 class WorkoutView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout.html'
@@ -36,14 +41,18 @@ class CreateWorkoutView(LoginRequiredMixin,generic.TemplateView):
     form_class = WorkoutForm
     redirect_field_name = ''
 
-class WorkoutDetailsView(LoginRequiredMixin,generic.TemplateView):
+class WorkoutDetailsView(ForFitView,LoginRequiredMixin,generic.TemplateView):
     template_name = 'workout/workout_details.html'
     redirect_field_name = ''
     pattern_name = 'workoutdetails'
 
     def get_context_data(self, pk):
+        token = opentok.generate_token(self.session_id)
         context = super().get_context_data()
         context['workout_id'] = pk
         context['current_profile'] = self.request.user.userprofile
+        context['api_key'] = settings.OPENTOK_API_KEY
+        context['session_id'] = self.session_id
+        context['token'] = token
         return context
 # Create your views here.

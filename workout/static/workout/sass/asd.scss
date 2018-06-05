@@ -211,6 +211,54 @@ div.content {
             }
         }
 
+        .nav-workout{
+            position: fixed;
+            top: 26.5%;
+            width: 100%;
+            height: 10%;
+            ul{
+                position: fixed;
+                width: 100%;
+                overflow: hidden;
+                background-color: #ffffff; 
+                list-style-type: none;
+                left: 13%;
+                li{
+                    float: left;
+                    & a{
+                        display: block;
+                        color: #a31d0b;
+                        text-align: center;
+                        padding: 5px 30px;
+                        text-decoration: none;
+                        font-size: 20px;
+                        &.active {
+                            background-color:#a31d0b;
+                            background-color: #a31d0b;
+                            color: #ffffff;
+                        }
+                    }
+                    & a:hover:not(.active) {
+                          background-color: black;
+                          color: #ffffff;
+                          cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .file-contents{
+            position: relative;
+            top: 26%;
+            overflow: scroll;
+            height: 76.8%;
+
+            &::-webkit-scrollbar {
+                display: none;
+                width: 0px;
+            }
+        }
+
         div.header{
             position: fixed;
             width: 70%;

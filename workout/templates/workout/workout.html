@@ -8,7 +8,7 @@
         <ul>
             <li><a href="{% url 'workout:home' %}">Home</a></li>
             <li><a class="active" href="{% url 'workout:workout' %}">Workout</a></li>
-            <li><a class="user"><img v-on:click="user" src="{% static "workout/images/user.png" %}" id="user"></a></li>
+            <li><a class="user"><img v-on:click="user" src="{% static "workout/images/User-01.png" %}" id="user"></a></li>
             <li style="float:right"><a href="{% url 'login:logout' %}">Logout</a></li>
         </ul>
     </div>
@@ -39,7 +39,7 @@
                 <h2  id="weight-display" v-bind:style="{display: hidelabel}"> <label>Weight:</label> [[ currentuser.weight ]]</h2>
                 <p><input v-model="currentprofile.weight" type="number" name="weight" class="userprofile-forms" placeholder="weight" v-bind:style="{display: showform}"></p>
                 <p><button class="userprofile" v-on:click="showLabels" v-bind:style="{display: showform}">Save</button></p>
-                <p><button class="userprofile" v-on:click="showForms" v-bind:style="{display: hidelabel}">Edit</button></p>
+                <p><button type="button" class="userprofile" v-on:click="showForms" v-bind:style="{display: hidelabel}">Edit</button></p>
             </form>
         </div>
     </div>
@@ -136,7 +136,7 @@
                 },
                 updateProfile: function(id){
                     getCookie;
-                    this.$http.put('/api/userprofile{/id}/update/', this.currentprofile, {headers: {'X-CSRFToken': getCookie("csrftoken")}})
+                    this.$http.put('/api/userprofile/update/', this.currentprofile, {headers: {'X-CSRFToken': getCookie("csrftoken")}})
                     .then((response) => {
                         this.currentprofile = {};
                     }).catch((error) => {
