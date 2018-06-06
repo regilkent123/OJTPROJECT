@@ -38,7 +38,7 @@ body {
       }
 
 
-      input.register_input{
+      .register_input{
         position: relative;
         width: 80%;
         padding: 12px 20px;
@@ -58,6 +58,17 @@ body {
               opacity: 0;
             }
         }
+      }
+
+      select{
+        opacity: 0.6;
+        text-align: center;
+      }
+
+      select option{
+        color: white;
+        background-color: rgba(0, 0, 0, 0.6);
+        text-align: center;
       }
 
       input.login_input{
@@ -81,6 +92,7 @@ body {
             }
         }
       }
+
 
       h1,input, select, textarea, button, a{
         font-family: OCR A Std, monospace;

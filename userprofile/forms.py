@@ -17,7 +17,7 @@ class RegisterForm(forms.ModelForm):
         username_get = self.cleaned_data.get('username').lower()
         username_exist = User.objects.filter(username=username_get)
         if username_exist.exists():
-            raise  forms.ValidationError("Username already exists")
+            raise forms.ValidationError("Username already exists")
         return username_get
 
     def clean_email(self):
@@ -25,13 +25,12 @@ class RegisterForm(forms.ModelForm):
         email_get = self.cleaned_data.get('email').lower()
         email_exist = User.objects.filter(email=email_get)
         if email_exist.exists():
-            raise  ValidationError("Email already exists")
+            raise ValidationError("Email already exists")
         return email_get
-
 
     def clean_repassword(self):
 
-        super(RegisterForm,self).clean()
+        super(RegisterForm, self).clean()
         password_get = self.cleaned_data.get('password')
         repassword_get = self.cleaned_data.get('repassword')
 
@@ -50,15 +49,16 @@ class RegisterForm(forms.ModelForm):
         )
         return user
 
-class UserProfileForm(forms.ModelForm): 
+
+class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
         fields = ['usertype', 'address', 'gender', 'height', 'weight']
         widgets = {
-            'address': forms.Textarea(attrs={'cols':10, 'rows':20})
+            'address': forms.Textarea(attrs={'cols': 10, 'rows': 20})
         }
 
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
-        self.fields['gender'].empty_label =  None
+        self.fields['gender'].empty_label = None
