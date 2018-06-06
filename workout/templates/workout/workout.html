@@ -26,12 +26,10 @@
                     <option v-for="gender in genders" v-bind:value="gender[0]">[[ gender ]]</option>
                 </select></p>
                 <h2 id="usertype-display" v-bind:style="{display: hidelabel}"> <label>User Type:</label> [[ prof.user_type ]] </h2>
-                <div v-if="null">
                 <p><select v-model="currentprofile.usertype" name="usertype" class="userprofile-forms" v-bind:style="{display: showform}">
                     <option value="" disabled selected>User Type</option>
                     <option v-for="(usertype,i) in usertypes" v-bind:value="i+1">[[ usertype ]]</option>
                 </select></p>
-                </div>
                 <h2 id="birthday-display" v-bind:style="{display: hidelabel}"> <label>Birthday:</label> [[ prof.birthdate ]] </h2>
                 <p><input v-model="currentprofile.birthdate" type="date" name="birthdate" class="userprofile-forms" placeholder="birthdate" v-bind:style="{display: showform}"></p>
                 <h2  id="address-display" v-bind:style="{display: hidelabel}"> <label>Address:</label> [[ prof.address ]] </h2>
