@@ -22,7 +22,7 @@ if (OT.checkSystemRequirements() == 1) {
     else {
       console.log("Connected to the session.");
 
-      var publisherContainer = document.getElementById('file-contents');
+      var publisherContainer = document.getElementById('live');
 
       publisher = OT.initPublisher(publisherContainer, {insertMode: "append", width:'500px', height:'500px'});
 

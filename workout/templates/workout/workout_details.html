@@ -55,12 +55,35 @@
             <ul>
                 <li><i><u><a v-bind:class="video" v-on:click="getVideos">Videos</a></u></i></li>
                 <li><i><u><a v-bind:class="audio" v-on:click="getAudio">Audio Coach</a></u></i></li>
-                <li><i><u><a v-bind:class="live" v-on:click="getLivestrean">Live Streams</a></u></i></li>
+                <li><i><u><a v-bind:class="live" v-on:click="getLivestream">Live Streams</a></u></i></li>
             </ul>
         </div>
         <div class="file-contents" id="file-contents">
-            <button id="1">Start </button>
-            <button id="2">End </button>
+            <div id="live" v-bind:style="{display: stream}">
+            </div>
+            <button id="1" v-bind:style="{display: livestream}">Start </button>
+            <button id="2" v-bind:style="{display: livestream}">End </button>
+            <div id="createVideo" class="modal-video" v-bind:style="{display: vm}">
+                <div class="videomodal">
+                    <form method="post" v-on:submit.prevent="addVideo($event)" enctype="multipart/form-data">
+                    <span class="close-vm" v-on:click="closevm">&times;</span><br>
+                    <h1>CREATE VIDEO</h1>
+                    <input type="text" v-model="createvid.video_name" class="createvid" name="video_name" placeholder="Video Name"><br><br>
+                    <label>Video File</label><br><input @change="videofile" type="file" class="createvid" name="video_file"><br><br>
+                    <label>Video Thumbnail</label><br><input @change="photo" type="file"  class="createvid" name="video_thumbnail"><br>
+                    [[ createvid.workout_video ]]<br>
+                    [[ createvid.workout_thumbnail ]]
+                    <button>Create</button>
+                    </form>    
+                </div>
+            </div>
+            <div v-for="vid in vids" class="vidfile" v-bind:style="{display: videos}">
+                <img v-bind:src="vid.workout_thumbnail">
+                <p>[[ vid.video_name ]]</p>
+            </div>
+        </div>
+        <div class="button">
+                <button v-on:click="showvm">Create Video</button>
         </div>
     </div>
 </div>
@@ -88,8 +111,14 @@
             data: function(){
                 return{
                     workouts:[],
+                    vids: [],
                     currentworkout:{},
                     currentprofile:{},
+                    createvid: {
+                        video_name: '',
+                        workout_video: '',
+                        workout_thumbnail: '',
+                    },
                     prof: {},
                     currentuser:{},
                     genders: ['Male','Female'],
@@ -100,6 +129,10 @@
                     video: '',
                     audio: '',
                     live: '',
+                    vm: 'none',
+                    livestream: 'none',
+                    videos: 'block',
+                    stream: 'none',
                 }
             },
             watch: {
@@ -123,22 +156,84 @@
                 this.getWorkouts();
                 this.getCurrentWorkout(workoutid);
                 this.getCurrentProfile(userId);
+                this.getVids();
             },
             methods: {
+                photo: function(e){
+                    var files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                        return;
+                    this.createPhoto(files[0]);
+                },
+                createPhoto(file) {
+                  var image = new Image();
+                  var reader = new FileReader();
+            
+                  reader.onload = (e) => {
+                    this.createvid.workout_thumbnail = e.target.result;
+                  };
+                  reader.readAsDataURL(file);
+                },
+                videofile: function(e){
+                    var files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                        return;
+                    this.createVideo(files[0]);
+                },
+                createVideo(file) {
+                  var image = new Image();
+                  var reader = new FileReader();
+            
+                  reader.onload = (e) => {
+                    this.createvid.workout_video = e.target.result;
+                  };
+                  reader.readAsDataURL(file);
+                },
+                addVideo: function(e){
+                    let form = new FormData(e.target)
+                    this.$http.post('/api/workoutvideo/', form, {headers: {'X-CSRFToken': getCookie("csrftoken"), 
+                    'Content-Type': 'multipart/form-data'}})
+                    .then((response) => {
+                        this.getVids();
+                    }).catch((error) => {
+                        console.log('ERROR')
+                    });
+                },
+                getVids: function(){
+                    var resource = this.$resource('/api/workoutvideo/');
+                    resource.get()
+                        .then((response)=> {
+                            this.vids = response.data;
+                        }).catch((error) => {
+                            console.log('ERROR')
+                        });
+                },
+                showvm: function(){
+                    this.vm = 'block';
+                },
+                closevm: function(){
+                    this.vm = 'none';
+                },
                 getVideos: function(){
                     this.video = 'active';
                     this.audio = '';
                     this.live = '';
+                    this.livestream = 'none';
+                    this.videos = 'block';
+                    this.stream = 'none';
                 },
                 getAudio: function(){
                     this.video = '';
                     this.audio = 'active';
                     this.live = '';
                 },
-                getLivestrean: function(){
+                getLivestream: function(){
                     this.video = '';
                     this.audio = '';
                     this.live = 'active';
+                    this.livestream = 'inline-block';
+                    this.videos = 'none';
+                    this.stream = 'block';
                 },
                 getCurrentWorkout: function(id){
                     var resource = this.$resource('/api/workout{/id}');

@@ -217,38 +217,35 @@ div.content div.layout img {
 /* line 190, ../sass/asd.scss */
 div.content div.layout .info-header {
   position: fixed;
-  top: 10px;
   text-align: left;
-  width: 100%;
+  width: 70%;
 }
-/* line 195, ../sass/asd.scss */
+/* line 194, ../sass/asd.scss */
 div.content div.layout .info-header .info {
   padding-bottom: 10px;
   background-color: #a31d0b;
   position: relative;
-  top: 80px;
   padding: 10px;
 }
-/* line 201, ../sass/asd.scss */
+/* line 199, ../sass/asd.scss */
 div.content div.layout .info-header .info h1 {
   font-size: 1.3em;
   font-family: calibri, arial;
   font-size: 25px;
   color: #333;
 }
-/* line 206, ../sass/asd.scss */
+/* line 204, ../sass/asd.scss */
 div.content div.layout .info-header .info h1 span {
   padding: 1px;
   font-size: 18px;
 }
-/* line 214, ../sass/asd.scss */
+/* line 212, ../sass/asd.scss */
 div.content div.layout .nav-workout {
   position: fixed;
-  top: 26.5%;
-  width: 100%;
-  height: 10%;
+  top: 27.8%;
+  width: 70%;
 }
-/* line 219, ../sass/asd.scss */
+/* line 216, ../sass/asd.scss */
 div.content div.layout .nav-workout ul {
   position: fixed;
   width: 100%;
@@ -257,11 +254,11 @@ div.content div.layout .nav-workout ul {
   list-style-type: none;
   left: 13%;
 }
-/* line 226, ../sass/asd.scss */
+/* line 223, ../sass/asd.scss */
 div.content div.layout .nav-workout ul li {
   float: left;
 }
-/* line 228, ../sass/asd.scss */
+/* line 225, ../sass/asd.scss */
 div.content div.layout .nav-workout ul li a {
   display: block;
   color: #a31d0b;
@@ -270,37 +267,128 @@ div.content div.layout .nav-workout ul li a {
   text-decoration: none;
   font-size: 20px;
 }
-/* line 235, ../sass/asd.scss */
+/* line 232, ../sass/asd.scss */
 div.content div.layout .nav-workout ul li a.active {
   background-color: #a31d0b;
   background-color: #a31d0b;
   color: #ffffff;
 }
-/* line 241, ../sass/asd.scss */
+/* line 238, ../sass/asd.scss */
 div.content div.layout .nav-workout ul li a:hover:not(.active) {
   background-color: black;
   color: #ffffff;
   cursor: pointer;
 }
-/* line 250, ../sass/asd.scss */
+/* line 247, ../sass/asd.scss */
+div.content div.layout .button {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+  bottom: 7%;
+  width: 70%;
+}
+/* line 255, ../sass/asd.scss */
 div.content div.layout .file-contents {
   position: relative;
-  top: 26%;
+  top: 28%;
   overflow: scroll;
-  height: 76.8%;
+  height: 66.5%;
 }
-/* line 256, ../sass/asd.scss */
+/* line 260, ../sass/asd.scss */
+div.content div.layout .file-contents #live {
+  position: relative;
+  left: 31.5%;
+}
+/* line 264, ../sass/asd.scss */
+div.content div.layout .file-contents .modal-video {
+  position: fixed;
+  z-index: 1;
+  top: 33.3%;
+  width: 70%;
+  height: 53.5%;
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: auto;
+  padding: 20px;
+}
+/* line 273, ../sass/asd.scss */
+div.content div.layout .file-contents .modal-video .videomodal {
+  position: relative;
+  top: 1%;
+  left: 25%;
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  border-radius: 10px;
+}
+/* line 281, ../sass/asd.scss */
+div.content div.layout .file-contents .modal-video .videomodal label {
+  font-family: OCR A Std, monospace;
+  weight: 900;
+  font-size: 20px;
+}
+/* line 286, ../sass/asd.scss */
+div.content div.layout .file-contents .modal-video .videomodal .createvid {
+  border: none;
+  border-bottom: 2px solid #a31d0b;
+  background-color: transparent;
+  font-size: 20px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  width: 50%;
+  color: black;
+}
+/* line 296, ../sass/asd.scss */
+div.content div.layout .file-contents .modal-video .videomodal h1 {
+  font-family: OCR A Std, monospace;
+  weight: 900;
+}
+/* line 301, ../sass/asd.scss */
+div.content div.layout .file-contents .modal-video .videomodal .close-vm {
+  color: rgba(0, 0, 0, 0.8);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+/* line 306, ../sass/asd.scss */
+div.content div.layout .file-contents .modal-video .videomodal .close-vm:hover, div.content div.layout .file-contents .modal-video .videomodal .close-vm:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* line 315, ../sass/asd.scss */
+div.content div.layout .file-contents .vidfile {
+  float: left;
+  background-color: white;
+  width: 30%;
+  height: 50%;
+  border: thin solid #777;
+  margin: 0.5em;
+  height: 400px;
+  background-color: rgba(229, 230, 232, 0.6);
+  border-radius: 12px;
+}
+/* line 326, ../sass/asd.scss */
+div.content div.layout .file-contents .vidfile img {
+  width: 95%;
+  height: 350px;
+  transition: transform 0.5s;
+  border-radius: 4px;
+}
+/* line 332, ../sass/asd.scss */
+div.content div.layout .file-contents .vidfile img:hover {
+  transform: scale(1.1);
+}
+/* line 338, ../sass/asd.scss */
 div.content div.layout .file-contents::-webkit-scrollbar {
   display: none;
   width: 0px;
 }
-/* line 262, ../sass/asd.scss */
+/* line 344, ../sass/asd.scss */
 div.content div.layout div.header {
   position: fixed;
   width: 70%;
   background-color: #4a4b4c;
 }
-/* line 268, ../sass/asd.scss */
+/* line 350, ../sass/asd.scss */
 div.content div.layout div.content-layout {
   padding-top: 60px;
   width: 100%;
@@ -308,7 +396,7 @@ div.content div.layout div.content-layout {
   display: table;
   clear: both;
 }
-/* line 275, ../sass/asd.scss */
+/* line 357, ../sass/asd.scss */
 div.content div.layout div.content-layout div {
   float: left;
   width: 31.95%;
@@ -319,46 +407,46 @@ div.content div.layout div.content-layout div {
   background-color: rgba(229, 230, 232, 0.6);
   border-radius: 12px;
 }
-/* line 285, ../sass/asd.scss */
+/* line 367, ../sass/asd.scss */
 div.content div.layout div.content-layout div p {
   text-align: left;
   font-weight: 900;
   font-family: OCR A Std, monospace;
 }
-/* line 291, ../sass/asd.scss */
+/* line 373, ../sass/asd.scss */
 div.content div.layout div.content-layout div img {
   width: 95%;
   height: 350px;
   transition: transform 0.5s;
   border-radius: 4px;
 }
-/* line 297, ../sass/asd.scss */
+/* line 379, ../sass/asd.scss */
 div.content div.layout div.content-layout div img:hover {
   transform: scale(1.1);
 }
-/* line 302, ../sass/asd.scss */
+/* line 384, ../sass/asd.scss */
 div.content div.layout div.content-layout div a {
   color: black;
 }
-/* line 305, ../sass/asd.scss */
+/* line 387, ../sass/asd.scss */
 div.content div.layout div.content-layout div a:hover {
   color: #521f7c;
 }
-/* line 312, ../sass/asd.scss */
+/* line 394, ../sass/asd.scss */
 div.content div.layout * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-/* line 320, ../sass/asd.scss */
+/* line 402, ../sass/asd.scss */
 input, select, textarea, button, a, span {
   color: white;
   font-family: OCR A Std, monospace;
   weight: 900;
 }
 
-/* line 326, ../sass/asd.scss */
+/* line 408, ../sass/asd.scss */
 button {
   background-color: #a31d0b;
   border: none;
@@ -372,19 +460,19 @@ button {
   margin: 4px 2px;
   cursor: pointer;
 }
-/* line 339, ../sass/asd.scss */
+/* line 421, ../sass/asd.scss */
 button:hover {
   background-color: #111;
 }
 
-/* line 344, ../sass/asd.scss */
+/* line 426, ../sass/asd.scss */
 div.content_createworkout {
   text-align: center;
   margin: auto;
   width: 70%;
   padding: 10px;
 }
-/* line 350, ../sass/asd.scss */
+/* line 432, ../sass/asd.scss */
 div.content_createworkout div.layout_createworkout {
   position: relative;
   left: 20%;
@@ -398,22 +486,22 @@ div.content_createworkout div.layout_createworkout {
   border-radius: 12px;
   top: 100px;
 }
-/* line 363, ../sass/asd.scss */
+/* line 445, ../sass/asd.scss */
 div.content_createworkout div.layout_createworkout h1 {
   font-family: OCR A Std, monospace;
   color: white;
   font-size: 50px;
 }
-/* line 369, ../sass/asd.scss */
+/* line 451, ../sass/asd.scss */
 div.content_createworkout div.layout_createworkout ::placeholder {
   color: white;
   opacity: 0.6;
 }
-/* line 374, ../sass/asd.scss */
+/* line 456, ../sass/asd.scss */
 div.content_createworkout div.layout_createworkout textarea {
   resize: none;
 }
-/* line 379, ../sass/asd.scss */
+/* line 461, ../sass/asd.scss */
 div.content_createworkout div.layout_createworkout .createworkout {
   width: 80%;
   padding: 12px 20px;
@@ -425,27 +513,27 @@ div.content_createworkout div.layout_createworkout .createworkout {
   font-size: 30px;
   text-align: center;
 }
-/* line 390, ../sass/asd.scss */
+/* line 472, ../sass/asd.scss */
 div.content_createworkout div.layout_createworkout .createworkout:focus {
   border-bottom: 2px solid #0b91a3;
   outline: none;
 }
-/* line 394, ../sass/asd.scss */
+/* line 476, ../sass/asd.scss */
 div.content_createworkout div.layout_createworkout .createworkout:focus::-webkit-input-placeholder {
   opacity: 0;
 }
-/* line 399, ../sass/asd.scss */
+/* line 481, ../sass/asd.scss */
 div.content_createworkout div.layout_createworkout select.createworkout {
   background: rgba(0, 0, 0, 0.3);
 }
 
-/* line 406, ../sass/asd.scss */
+/* line 488, ../sass/asd.scss */
 .topnav {
   overflow: hidden;
   background-color: #333;
 }
 
-/* line 411, ../sass/asd.scss */
+/* line 493, ../sass/asd.scss */
 .topnav a {
   float: left;
   color: #f2f2f2;
@@ -455,13 +543,13 @@ div.content_createworkout div.layout_createworkout select.createworkout {
   font-size: 17px;
 }
 
-/* line 420, ../sass/asd.scss */
+/* line 502, ../sass/asd.scss */
 .topnav a:hover {
   background-color: #ddd;
   color: black;
 }
 
-/* line 425, ../sass/asd.scss */
+/* line 507, ../sass/asd.scss */
 .topnav a.active {
   background-color: #4CAF50;
   color: white;
