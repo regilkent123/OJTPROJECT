@@ -17,14 +17,14 @@ if(OT.checkSystemRequirements() == 1){
   });
 
   session.on("streamCreated", function(event) {
-    session.subscribe(event.stream, 'subscriber',
-      {inserMode:'append', width:'50%', height:'50%'}
+    var subscriberContainer = document.getElementById('topnav');
+    session.subscribe(event.stream, subscriberContainer,
+      {insertMode:'replace', width:'100%', height:'100%'}
     );
     console.log('Successfully subscribe');
     successMessage.textContent = 'Live';
     errorMessage.textContent = '';
   });
-
 
   session.on("streamDestroyed", function(event) {
     event.preventDefault();

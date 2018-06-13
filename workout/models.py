@@ -1,4 +1,5 @@
 from django.db import models
+from userprofile.models import User
 
 class Workout(models.Model):
     workout_name = models.CharField(max_length=200)
@@ -18,5 +19,11 @@ class Workout(models.Model):
 
     def __str__(self):
         return self.workout_name
+
+class WorkoutVideo(models.Model):
+    workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
+    workout_video = models.FileField(upload_to='videos/',null=True)
+    video_name = models.CharField(max_length=100)
+    workout_thumbnail = models.ImageField(upload_to='thumbnails/',null=True)
 
 # Create your models here.

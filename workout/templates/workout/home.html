@@ -8,7 +8,7 @@
         <ul>
             <li><a class="active" href="{% url 'workout:home' %}">Home</a></li>
             <li><a href="{% url 'workout:workout' %}">Workout</a></li>
-            <li><a class="user"><img v-on:click="user" src="{% static "workout/images/User-01.png" %}" id="user"></a></li>
+            <li><a class="user"><img v-on:click="user" src="{% static "workout/images/user.png" %}" id="user"></a></li>
             <li style="float:right"><a href="{% url 'login:logout' %}">Logout</a></li>
         </ul>
     </div>
@@ -17,29 +17,30 @@
             <span class="close" v-on:click="close">&times;</span>
             <p><h1>PROFILE PAGE</h1></p>
             <img src="{% static "workout/images/pewds.jpg" %}" id="user">
-            <p><h2>[[ currentuser.fullname ]]</h2></p>
-            <p><h2>[[ currentuser.email ]]</h2></p>
-            {{ current_profile.id }}
+            <p><h2>[[ prof.fullname ]]</h2></p>
+            <p><h2>[[ prof.email ]]</h2></p>
             <form method="post" v-on:submit.prevent="updateProfile($event)">
-                <h2 id="gender-display" v-bind:style="{display: hidelabel}"> <label >Gender:</label> [[ currentuser.gender ]] </h2>
+                <h2 id="gender-display" v-bind:style="{display: hidelabel}"> <label >Gender:</label> [[ prof.sex ]] </h2>
                 <p><select v-model="currentprofile.gender" name="gender" class="userprofile-forms" v-bind:style="{display: showform}">
                     <option value="" disabled selected>Gender</option>
                     <option v-for="gender in genders" v-bind:value="gender[0]">[[ gender ]]</option>
                 </select></p>
-                <h2 id="usertype-display" v-bind:style="{display: hidelabel}"> <label>User Type:</label> [[ currentuser.usertype ]] </h2>
+                <h2 id="usertype-display" v-bind:style="{display: hidelabel}"> <label>User Type:</label> [[ prof.user_type ]] </h2>
+                <div v-if="currentprofile.usertype == null">
                 <p><select v-model="currentprofile.usertype" name="usertype" class="userprofile-forms" v-bind:style="{display: showform}">
                     <option value="" disabled selected>User Type</option>
                     <option v-for="(usertype,i) in usertypes" v-bind:value="i+1">[[ usertype ]]</option>
                 </select></p>
-                <h2 id="birthday-display" v-bind:style="{display: hidelabel}"> <label>Birthday:</label> [[ currentuser.birthdate ]] </h2>
+                </div>
+                <h2 id="birthday-display" v-bind:style="{display: hidelabel}"> <label>Birthday:</label> [[ prof.birthdate ]] </h2>
                 <p><input v-model="currentprofile.birthdate" type="date" name="birthdate" class="userprofile-forms" placeholder="birthdate" v-bind:style="{display: showform}"></p>
-                <h2  id="address-display" v-bind:style="{display: hidelabel}"> <label>Address:</label> [[ currentuser.address ]] </h2>
+                <h2  id="address-display" v-bind:style="{display: hidelabel}"> <label>Address:</label> [[ prof.address ]] </h2>
                 <p><textarea v-model="currentprofile.address" name="address" class="userprofile-forms" placeholder="address" v-bind:style="{display: showform}"></textarea></p>
-                <h2  id="height-display" v-bind:style="{display: hidelabel}"> <label>Height:</label> [[ currentuser.height ]]</h2>
+                <h2  id="height-display" v-bind:style="{display: hidelabel}"> <label>Height:</label> [[ prof.height ]]</h2>
                 <p><input v-model="currentprofile.height" type="number" name="height" class="userprofile-forms" placeholder="height" v-bind:style="{display: showform}"></p>
-                <h2  id="weight-display" v-bind:style="{display: hidelabel}"> <label>Weight:</label> [[ currentuser.weight ]]</h2>
+                <h2  id="weight-display" v-bind:style="{display: hidelabel}"> <label>Weight:</label> [[ prof.weight ]]</h2>
                 <p><input v-model="currentprofile.weight" type="number" name="weight" class="userprofile-forms" placeholder="weight" v-bind:style="{display: showform}"></p>
-                <p><button class="userprofile" v-on:click="showLabels" v-bind:style="{display: showform}">Save</button></p>
+                <p><button type="submit" class="userprofile" v-on:click="showLabels" v-bind:style="{display: showform}">Save</button></p>
                 <p><button type="button" class="userprofile" v-on:click="showForms" v-bind:style="{display: hidelabel}">Edit</button></p>
             </form>
         </div>
@@ -91,7 +92,6 @@
         },
         mounted: function(){
             this.getCurrentProfile(userId);
-            this.getCurrentUser(userId);
         },
         methods: {
                 getWorkouts: function(e){
@@ -112,12 +112,13 @@
                 showForms: function(){
                     this.showform = 'block'
                     this.hidelabel = 'none'
-                    this.getCurrentUser(userId);
+                    this.getCurrentProfile(userId);
                     return
                 },
                 showLabels: function(){
                     this.showform = 'none'
                     this.hidelabel = 'block'
+                    return
                 },
                 updateProfile: function(id){
                     getCookie;
@@ -138,15 +139,6 @@
                             console.log('ERROR')
                         });
                 },
-                getCurrentUser: function(id){
-                var resource = this.$resource('/api/user{/id}');
-                resource.get({id: id})
-                    .then((response) => {
-                        this.currentuser = response.data;
-                    }).catch((error) => {
-                        console.log('ERROR')
-                    });
-            },
             }
     })
 </script>

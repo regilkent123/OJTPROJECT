@@ -3,6 +3,7 @@ from .models import UserProfile, User
 from .serializers import UserProfileSerializer, UserSerializer
 from rest_framework.response import Response
 
+
 class UserProfileViewset(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
@@ -16,8 +17,9 @@ class UserProfileViewset(viewsets.ModelViewSet):
         profile = request.user.userprofile
         serializer = UserProfileSerializer(profile, data=request.data)
         if serializer.is_valid():
-            serializer.save();
+            serializer.save()
         return Response()
+
 
 class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()

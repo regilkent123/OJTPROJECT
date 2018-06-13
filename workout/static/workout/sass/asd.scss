@@ -189,14 +189,12 @@ div.content {
 
         .info-header{
             position: fixed;
-            top: 10px;
             text-align: left;
-            width: 100%;
+            width: 70%;
             .info{
                 padding-bottom: 10px;
                 background-color: #a31d0b;
                 position: relative;
-                top: 80px;
                 padding: 10px;
                 h1{
                     font-size: 1.3em;
@@ -213,9 +211,8 @@ div.content {
 
         .nav-workout{
             position: fixed;
-            top: 26.5%;
-            width: 100%;
-            height: 10%;
+            top: 27.8%;
+            width: 70%;
             ul{
                 position: fixed;
                 width: 100%;
@@ -247,11 +244,96 @@ div.content {
             }
         }
 
+        .button{
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.8);
+            bottom: 7%;
+            width: 70%;
+
+        }
+
         .file-contents{
             position: relative;
-            top: 26%;
+            top: 28%;
             overflow: scroll;
-            height: 76.8%;
+            height: 66.5%;
+            #live{
+                position: relative;
+                left: 31.5%;
+            }
+            .modal-video{
+                position: fixed;
+                z-index: 1;
+                top: 33.3%;
+                width: 70%;
+                height: 53.5%;
+                background-color: rgba(0, 0, 0, 0.3);
+                margin: auto;
+                padding: 20px;
+                .videomodal{
+                    position: relative;
+                    top: 1%;
+                    left: 25%;
+                    width: 50%;
+                    height: 100%;
+                    background-color: rgba(255, 255, 255, 1);
+                    border-radius: 10px;
+                    label{
+                        font-family: OCR A Std, monospace;
+                        weight: 900;
+                        font-size: 20px;
+                    }
+                    .createvid{
+                        border: none;
+                        border-bottom: 2px solid #a31d0b;
+                        background-color: rgba(0, 0, 0, 0);
+                        font-size: 20px;
+                        padding: 12px 20px;
+                        margin: 8px 0;
+                        width: 50%;
+                        color: black;
+                    }
+                    h1{
+                        font-family: OCR A Std, monospace;
+                        weight: 900;
+                    }
+
+                    .close-vm {
+                        color: rgba(0, 0, 0, 0.8);
+                        float: right;
+                        font-size: 28px;
+                        font-weight: bold;
+                        &:hover, &:focus{
+                            color: #000;
+                            text-decoration: none;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+
+            .vidfile{
+                float: left;
+                background-color: white;
+                width: 30%;
+                height: 50%;
+                border:thin solid #777;
+                margin: 0.5em;
+                height: 400px;
+                background-color: rgba(229, 230, 232, 0.6);
+                border-radius: 12px;
+
+                & img{
+                    width: 95%;
+                    height: 350px;
+                    transition: transform 0.5s;
+                    border-radius: 4px;
+
+                    &:hover{
+                        transform: scale(1.1);
+                    }
+                }
+            }
 
             &::-webkit-scrollbar {
                 display: none;

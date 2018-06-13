@@ -41,7 +41,7 @@ body {
   top: 50px;
 }
 /* line 41, ../sass/asd.scss */
-.container .login input.register_input {
+.container .login .register_input {
   position: relative;
   width: 80%;
   padding: 12px 20px;
@@ -55,15 +55,26 @@ body {
   bottom: 10px;
 }
 /* line 54, ../sass/asd.scss */
-.container .login input.register_input:focus {
+.container .login .register_input:focus {
   border-bottom: 2px solid #0b91a3;
   outline: none;
 }
 /* line 57, ../sass/asd.scss */
-.container .login input.register_input:focus::-webkit-input-placeholder {
+.container .login .register_input:focus::-webkit-input-placeholder {
   opacity: 0;
 }
 /* line 63, ../sass/asd.scss */
+.container .login select {
+  opacity: 0.6;
+  text-align: center;
+}
+/* line 68, ../sass/asd.scss */
+.container .login select option {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+/* line 74, ../sass/asd.scss */
 .container .login input.login_input {
   position: relative;
   width: 100%;
@@ -77,27 +88,27 @@ body {
   text-align: center;
   top: 50px;
 }
-/* line 76, ../sass/asd.scss */
+/* line 87, ../sass/asd.scss */
 .container .login input.login_input:focus {
   border-bottom: 2px solid #0b91a3;
   outline: none;
 }
-/* line 79, ../sass/asd.scss */
+/* line 90, ../sass/asd.scss */
 .container .login input.login_input:focus::-webkit-input-placeholder {
   opacity: 0;
 }
-/* line 85, ../sass/asd.scss */
+/* line 97, ../sass/asd.scss */
 .container .login h1, .container .login input, .container .login select, .container .login textarea, .container .login button, .container .login a {
   font-family: OCR A Std, monospace;
   color: white;
   font-weight: 900;
 }
-/* line 91, ../sass/asd.scss */
+/* line 103, ../sass/asd.scss */
 .container .login ::placeholder {
   color: white;
   opacity: 0.6;
 }
-/* line 96, ../sass/asd.scss */
+/* line 108, ../sass/asd.scss */
 .container .login button#login {
   position: relative;
   background-color: #a31d0b;
@@ -113,21 +124,21 @@ body {
   cursor: pointer;
   top: 60px;
 }
-/* line 111, ../sass/asd.scss */
+/* line 123, ../sass/asd.scss */
 .container .login button#login:hover {
   background-color: #0b91a3;
 }
-/* line 116, ../sass/asd.scss */
+/* line 128, ../sass/asd.scss */
 .container .login a#signup {
   position: relative;
   color: white;
   top: 60px;
 }
-/* line 121, ../sass/asd.scss */
+/* line 133, ../sass/asd.scss */
 .container .login a#signup:hover {
   color: violet;
 }
-/* line 126, ../sass/asd.scss */
+/* line 138, ../sass/asd.scss */
 .container .login button#register {
   position: relative;
   background-color: #a31d0b;
@@ -142,20 +153,20 @@ body {
   margin: 4px 2px;
   cursor: pointer;
 }
-/* line 140, ../sass/asd.scss */
+/* line 152, ../sass/asd.scss */
 .container .login button#register:hover {
   background-color: #0b91a3;
 }
-/* line 145, ../sass/asd.scss */
+/* line 157, ../sass/asd.scss */
 .container .login a#register {
   position: relative;
   color: white;
 }
-/* line 149, ../sass/asd.scss */
+/* line 161, ../sass/asd.scss */
 .container .login a#register:hover {
   color: violet;
 }
-/* line 155, ../sass/asd.scss */
+/* line 167, ../sass/asd.scss */
 .container .login h1 {
   color: white;
   font-size: 40px;
