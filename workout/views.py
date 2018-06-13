@@ -54,4 +54,3 @@ class WorkoutDetailsView(ForFitView,LoginRequiredMixin,generic.TemplateView):
         context['session_id'] = self.session_id
         context['token'] = token
         return context
-# Create your views here.

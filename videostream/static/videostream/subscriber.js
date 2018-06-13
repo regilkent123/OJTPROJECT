@@ -35,5 +35,3 @@ if(OT.checkSystemRequirements() == 1){
 }
 else 
   console.log('Failed');
-
-

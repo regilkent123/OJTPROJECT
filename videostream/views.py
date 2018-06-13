@@ -1,10 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse, JsonResponse
-from django.http import Http404
-from django.shortcuts import get_object_or_404, render
 from django.views.generic import TemplateView
-from opentok import OpenTok, MediaModes, Roles, OutputModes, ArchiveModes
+from opentok import OpenTok, MediaModes, OutputModes
 from .models import Session, Archive
 from django.contrib.auth.mixins import LoginRequiredMixin
 from userprofile.forms import UserProfileForm
@@ -32,41 +30,33 @@ class PublishVideoView(ForFitView):
 
     def get(self, request, *args, **kwargs):
         token = opentok.generate_token(self.session_id)
-        content = {
+        context = {
             'api_key': settings.OPENTOK_API_KEY,
             'session_id': self.session_id,
             'token': token,
         }
-        return render(request, 'videostream/publisher.html', content)
+        return render(request, 'videostream/publisher.html', context)
 
 class SubscribeVideoView(ForFitView):
 
     def get(self, request, *args, **kwargs):
         token = opentok.generate_token(self.session_id)
-        content = {
+        context = {
             'api_key': settings.OPENTOK_API_KEY,
             'session_id': self.session_id,
             'token': token,
         }
-        return render(request, 'videostream/subscriber.html', content)
+        return render(request, 'videostream/subscriber.html', context)
 
 class HomeView(LoginRequiredMixin,generic.TemplateView):
-
     template_name = 'workout/home.html'
-    initial = {'key': 'value'}
-    login_url = '/login/'
     redirect_field_name = ''
     form_class = UserProfileForm
 
-    def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-        return render(request, self.template_name, {'form': form})
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['current_profile'] = self.request.user.userprofile
+        return context
 
 class startArchiveView(ForFitView):
     def get(self, request, *args, **kwargs):
@@ -78,28 +68,100 @@ class startArchiveView(ForFitView):
             name='Videos',
             output_mode=OutputModes.individual,
         )
+        print("here")
         print("start", vars(archive))
         archives = Archive.objects.create(archive_id=archive.id)
         archive_id=archive.id 
         return JsonResponse({'archive_id':archive_id})
 
+
 class endArchiveView(LoginRequiredMixin, View):
     def get(self , request , *args , **kwargs):
         print(self.request.GET.get("archive_id"))
         archive_id = self.request.GET.get("archive_id")
-        opentok.stop_archive(archive_id)
+        archive=opentok.stop_archive(archive_id)
+        print(archive_id,archive.json())
         return HttpResponse('Stop recording')
 
-class deleteArchive(ForFitView):
+# class listArchive(ForFitView):
+#     def get(self , request , *args , **kwargs):
+#         archive_id= self.request.GET.get("archive_id")
+#         archive_list = opentok.list_archive()
+#         archive=archive_list.items[i]
+
+#         for archive in iter(archive_list):
+#             pass
+
+#         total = archive_list.total
+
+
+
+class deleteArchive(LoginRequiredMixin, View):
     def get(self , request , *args , **kwargs):
         print(self.request.GET.get("archive_id"))
         archive_id = self.request.GET.get("archive_id")
         opentok.delete_archive(archive_id)
-        return HttpResponse('Deleted recording')    
+        return HttpResponse('Deleted recording') 
 
-class listArchive(ForFitView):
-    def get(self, request, *args, **kwargs):
-        archive_list = opentok.list_archive()
-        pass
-        total = archive_list.total
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def videoTitle (request, title_id):
+#         title = get_object_or_404(Archive, pk=title_id)
+#         archiveTitle=request.POST[]
+#         return render(request, 'videostream/viewArchive.html',{'title': title})
+
+
+# class history(ForFitView):
+#     def get(self, request, *args, **kwargs):
+#         # page = int(request.GET.get('page', '1'))
+#         # archive_id = self.request.GET.get("archive_id")
+#         # for archive_id in (self.session_id):
+#         #     print (archive_id)
+#         # # offset = (page - 1) * 5
+
+#         # # context = {
+#         # archives = opentok.get_archives(offset= offset, count=5)
+#         # show_previous = '/videostream/history?page=' + str(page - 1) if page > 1 else None
+#         # show_next = '/videostream/history?page=' + str(page+1) if archives.count > (offset + 5) else None
+#         # # }
+#         # return JsonResponse({'self.session_id':self.session_id})
+#         # return render('videostream/history.html', {'archives': archives})
+#     # def get(self, request, *args, **kwargs):
+
+#         archive_list = opentok.list_archive(self.session_id)
+        # pass
+
+    #     total = archive_list.total
+    #     return HttpResponse(total)
+
+# class download(ForFitView):
+#     def get(self, request, *args, **kwargs):
+#         archive_id = self.request.GET.get("archive_id")
